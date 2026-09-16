@@ -1,0 +1,21 @@
+produit_id,entreprise,nom,categorie,description,prix,devise,stock,sku
+P001,Entreprise D,Sac a main cuir Kara,Maroquinerie,Sac a main en cuir veritable double compartiment bandouliere reglable,28500,FCFA,14,KARA-SAC-01
+P002,Entreprise D,Sac a dos urbain Zeno,Maroquinerie,Sac a dos toile enduite compartiment ordinateur 15 pouces,19000,FCFA,22,ZENO-DOS-02
+P003,Entreprise D,Portefeuille homme Sika,Maroquinerie,Portefeuille cuir grene 8 emplacements cartes,9500,FCFA,40,SIKA-PTF-03
+P004,Entreprise D,Chemise lin blanche,Habillement,Chemise en lin leger coupe droite tailles S a XXL,15000,FCFA,30,CHM-LIN-04
+P005,Entreprise D,Robe pagne Akoma,Habillement,Robe en pagne wax doublee coupe cintree finition main,32000,FCFA,9,AKM-ROB-05
+P006,Entreprise D,Ensemble boubou homme,Habillement,Boubou brode trois pieces coton bazin,45000,FCFA,7,BBU-HOM-06
+P007,Entreprise D,Baskets Neo Runner,Chaussures,Baskets running semelle amortissante pointures 39 a 45,27500,FCFA,18,NEO-BSK-07
+P008,Entreprise D,Sandales cuir Adjoa,Chaussures,Sandales plates cuir tresse fabrication artisanale,16500,FCFA,25,ADJ-SND-08
+P009,Entreprise D,Mocassins Lome Classic,Chaussures,Mocassins cuir cousu main semelle gomme,38000,FCFA,11,LOM-MOC-09
+P010,Entreprise D,Montre Chrono Sahel,Accessoires,Montre chronographe bracelet acier etanche 5 ATM,42000,FCFA,6,SAH-MTR-10
+P011,Entreprise D,Lunettes soleil Harmattan,Accessoires,Lunettes de soleil polarisees monture acetate UV400,12000,FCFA,35,HRM-LUN-11
+P012,Entreprise D,Ceinture cuir reversible,Accessoires,Ceinture cuir reversible boucle automatique 110 cm,11000,FCFA,28,CEI-REV-12
+P013,Entreprise D,Casque audio Bluetooth K7,Electronique,Casque sans fil reduction de bruit autonomie 30h,35000,FCFA,12,K7-CAS-13
+P014,Entreprise D,Enceinte portable Tam-Tam,Electronique,Enceinte Bluetooth 20W etanche IPX6 autonomie 12h,24000,FCFA,16,TAM-ENC-14
+P015,Entreprise D,Batterie externe 20000mAh,Electronique,Batterie externe charge rapide 22.5W double sortie USB,15500,FCFA,33,BAT-EXT-15
+P016,Entreprise D,Chargeur rapide 65W,Electronique,Chargeur GaN 65W trois ports compatible ordinateur portable,18000,FCFA,20,CHR-65W-16
+P017,Entreprise D,Foulard soie Kente,Accessoires,Foulard imprime motif kente 100 pourcent soie,14000,FCFA,19,KEN-FLR-17
+P018,Entreprise D,Trousse de voyage Sena,Maroquinerie,Trousse de toilette compartimentee toile imperméable,8500,FCFA,26,SEN-TRS-18
+P019,Entreprise D,Veste jean brodee,Habillement,Veste en jean brodee dos motif adinkra edition limitee,34000,FCFA,5,VST-JEN-19
+P020,Entreprise D,Tapis de yoga Equilibre,Sport,Tapis antiderapant 6mm sangle de transport incluse,13500,FCFA,15,YOG-TAP-20

@@ -1,0 +1,31 @@
+message_id,entreprise,client_id,canal,date,direction,message
+M001,Entreprise D,C001,whatsapp,2026-09-01 08:12:00,inbound,Bonjour je cherche un sac a main en cuir pour offrir
+M002,Entreprise D,C001,whatsapp,2026-09-01 08:14:00,outbound,Bonjour Afi. Le sac a main cuir Kara est a 28500 FCFA et il est en stock.
+M003,Entreprise D,C001,whatsapp,2026-09-01 08:20:00,inbound,Parfait je prends 1 sac Kara livraison a Tokoin
+M004,Entreprise D,C002,whatsapp,2026-09-02 10:05:00,inbound,Salut combien coute le casque audio bluetooth
+M005,Entreprise D,C002,whatsapp,2026-09-02 10:07:00,outbound,Le casque K7 est a 35000 FCFA avec reduction de bruit et 30h d autonomie.
+M006,Entreprise D,C002,whatsapp,2026-09-02 10:15:00,inbound,Ok je confirme la commande du casque
+M007,Entreprise D,C003,instagram,2026-09-03 14:30:00,inbound,Bonsoir la robe pagne Akoma est encore disponible en taille M
+M008,Entreprise D,C003,instagram,2026-09-03 14:41:00,outbound,Oui la robe Akoma est disponible en M a 32000 FCFA.
+M009,Entreprise D,C004,messenger,2026-09-04 09:00:00,inbound,Bonjour je veux commander 2 paires de baskets Neo Runner pointure 42
+M010,Entreprise D,C004,messenger,2026-09-04 09:05:00,outbound,Nous notons 2 x Neo Runner pointure 42 soit 55000 FCFA. Livraison ou retrait
+M011,Entreprise D,C005,email,2026-09-04 16:20:00,inbound,Bonjour quels sont vos moyens de paiement pour une commande entreprise
+M012,Entreprise D,C005,email,2026-09-04 16:45:00,outbound,Nous acceptons TMoney Flooz especes et virement et emettons une facture avec NIF.
+M013,Entreprise D,C006,whatsapp,2026-09-05 11:10:00,inbound,Est ce que vous livrez a Agoe et en combien de temps
+M014,Entreprise D,C006,whatsapp,2026-09-05 11:12:00,outbound,Oui nous livrons a Agoe sous 24h pour 1500 FCFA.
+M015,Entreprise D,C007,instagram,2026-09-06 18:02:00,inbound,Bonsoir le foulard soie Kente coute combien
+M016,Entreprise D,C007,instagram,2026-09-06 18:06:00,outbound,Le foulard soie Kente est a 14000 FCFA disponible en trois coloris.
+M017,Entreprise D,C008,email,2026-09-07 08:40:00,inbound,Nous souhaitons 10 batteries externes pour nos commerciaux avec facture
+M018,Entreprise D,C008,email,2026-09-07 09:15:00,outbound,Pour 10 batteries externes nous appliquons 15 pourcent de remise soit 131750 FCFA.
+M019,Entreprise D,C009,whatsapp,2026-09-08 13:25:00,inbound,Bonjour je passe retirer mes mocassins en boutique aujourd hui
+M020,Entreprise D,C009,whatsapp,2026-09-08 13:27:00,outbound,Votre commande est prete au retrait Rue des Cocotiers Tokoin jusqu a 19h.
+M021,Entreprise D,C010,messenger,2026-09-09 15:50:00,inbound,Je veux annuler ma commande de lunettes finalement
+M022,Entreprise D,C010,messenger,2026-09-09 15:55:00,outbound,C est note votre commande de lunettes est annulee sans frais.
+M023,Entreprise D,C011,whatsapp,2026-09-10 07:45:00,inbound,Bonjour avez vous des ceintures en cuir reversibles
+M024,Entreprise D,C011,whatsapp,2026-09-10 07:50:00,outbound,Oui la ceinture cuir reversible est a 11000 FCFA taille 110 cm ajustable.
+M025,Entreprise D,C012,instagram,2026-09-11 19:30:00,inbound,La veste jean brodee est encore en stock je la veux
+M026,Entreprise D,C012,instagram,2026-09-11 19:33:00,outbound,Il reste 5 vestes jean brodees a 34000 FCFA. Nous preparons la votre.
+M027,Entreprise D,C001,whatsapp,2026-09-12 09:00:00,inbound,Merci j ai bien recu le sac il est magnifique
+M028,Entreprise D,C001,whatsapp,2026-09-12 09:02:00,outbound,Merci beaucoup Afi. A tres bientot chez Entreprise D.
+M029,Entreprise D,C006,whatsapp,2026-09-13 12:15:00,inbound,Je voudrais 3 chemises en lin blanches taille L
+M030,Entreprise D,C006,whatsapp,2026-09-13 12:20:00,outbound,3 chemises lin taille L soit 45000 FCFA. Livraison a Agoe demain matin.

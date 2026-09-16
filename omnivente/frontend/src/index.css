@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-paper-100 text-ink-800 font-sans antialiased;
+  }
+
+  .dark body {
+    @apply bg-ink-900 text-paper-100;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-paper-100;
+  }
+
+  .dark :focus-visible {
+    @apply ring-offset-ink-900;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-card border border-paper-200 bg-white shadow-lane
+      dark:border-ink-600 dark:bg-ink-800;
+  }
+
+  .field {
+    @apply w-full rounded-lg border border-paper-300 bg-white px-3 py-2 text-sm
+      text-ink-800 placeholder:text-ink-500/60 transition
+      focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500
+      dark:border-ink-600 dark:bg-ink-700 dark:text-paper-100;
+  }
+
+  .label {
+    @apply mb-1 block text-sm font-medium text-ink-600 dark:text-paper-300;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand-500 px-4 py-2
+      text-sm font-semibold text-white transition hover:bg-brand-600
+      disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-paper-300
+      px-3 py-2 text-sm font-medium text-ink-600 transition hover:bg-paper-100
+      dark:border-ink-600 dark:text-paper-300 dark:hover:bg-ink-700;
+  }
+
+  .lane-scroll {
+    scrollbar-width: thin;
+  }
+
+  .lane-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .lane-scroll::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-paper-300 dark:bg-ink-600;
+  }
+}
+
+/* Fond filigrane WhatsApp */
+.chat-whatsapp {
+  background-color: #ECE5DD;
+  background-image: radial-gradient(rgba(37, 211, 102, 0.16) 1px, transparent 1px),
+    radial-gradient(rgba(37, 211, 102, 0.1) 1px, transparent 1px);
+  background-size: 22px 22px, 22px 22px;
+  background-position: 0 0, 11px 11px;
+}
+
+.dark .chat-whatsapp {
+  background-color: #0B1A14;
+  background-image: radial-gradient(rgba(37, 211, 102, 0.18) 1px, transparent 1px),
+    radial-gradient(rgba(37, 211, 102, 0.1) 1px, transparent 1px);
+}
+
+/* Degrade Instagram */
+.chat-instagram {
+  background-image: linear-gradient(140deg, #FDF3F7 0%, #F6E7F5 45%, #EDE4FB 100%);
+}
+
+.dark .chat-instagram {
+  background-image: linear-gradient(140deg, #1C0F1A 0%, #221029 55%, #180F2A 100%);
+}
+
+/* Messenger */
+.chat-messenger {
+  background-image: linear-gradient(180deg, #F2F7FF 0%, #E8F1FF 100%);
+}
+
+.dark .chat-messenger {
+  background-image: linear-gradient(180deg, #0A1524 0%, #0D1C30 100%);
+}
+
+/* Email : gris acier epure */
+.chat-email {
+  background-color: #F4F5F7;
+  background-image: linear-gradient(180deg, rgba(100, 116, 139, 0.06) 0%, rgba(100, 116, 139, 0) 100%);
+}
+
+.dark .chat-email {
+  background-color: #111823;
+  background-image: none;
+}

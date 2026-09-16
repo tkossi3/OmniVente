@@ -1,0 +1,13 @@
+id,entreprise,question,reponse,tags
+R001,Entreprise D,Quels sont vos horaires d ouverture,"Notre boutique est ouverte du lundi au samedi de 8h a 19h. Le dimanche nous repondons uniquement par message jusqu a 13h.",horaires;ouverture
+R002,Entreprise D,Livrez-vous a domicile,"Oui, nous livrons partout a Lome sous 24h pour 1500 FCFA, et en region sous 72h via les compagnies de transport partenaires.",livraison;delai
+R003,Entreprise D,Quels moyens de paiement acceptez-vous,"Nous acceptons TMoney, Flooz, les especes a la livraison et le virement bancaire. Le paiement se fait a la reception pour Lome.",paiement;mobile money
+R004,Entreprise D,Puis-je echanger un article,"Vous disposez de 7 jours pour echanger un article non porte avec son emballage et le recu. L echange se fait en boutique.",echange;retour;garantie
+R005,Entreprise D,Faites-vous des reductions sur les grosses quantites,"A partir de 5 articles identiques nous appliquons 10 pourcent de remise, et 15 pourcent a partir de 10 articles.",remise;gros;prix
+R006,Entreprise D,Ou se trouve votre boutique,"Nous sommes situes Rue des Cocotiers, Tokoin, a 200 metres du carrefour GTA. Un parking est disponible devant la boutique.",adresse;boutique;localisation
+R007,Entreprise D,Vos articles sont-ils garantis,"Les articles electroniques sont garantis 6 mois pieces et main d oeuvre. La maroquinerie est garantie 3 mois sur les coutures.",garantie;qualite
+R008,Entreprise D,Puis-je reserver un article,"Oui, nous gardons un article 48h apres un acompte de 30 pourcent. Passe ce delai il repart en vente.",reservation;acompte
+R009,Entreprise D,Avez-vous d autres tailles disponibles,"Nos vetements vont du S au XXL. Indiquez-nous votre taille habituelle et nous verifions la disponibilite immediatement.",taille;stock;habillement
+R010,Entreprise D,Faites-vous des factures pour entreprises,"Oui, nous emettons des factures avec NIF pour les achats professionnels. Envoyez-nous vos coordonnees de facturation.",facture;entreprise;professionnel
+R011,Entreprise D,Le retrait en boutique est-il possible,"Bien sur. Commandez par message, nous preparons le colis et vous recevez un SMS des qu il est pret au retrait.",retrait;boutique;click and collect
+R012,Entreprise D,Combien de temps dure la livraison,"La livraison a Lome prend entre 3h et 24h selon le quartier. Pour les autres villes comptez 48h a 72h.",livraison;delai
