@@ -50,6 +50,7 @@ app.add_middleware(
 
 for module in (tenants, products, orders, clients, conversations, stats, webhooks):
     app.include_router(module.router)
+app.include_router(tenants.auth_router)
 
 
 @app.get("/health", tags=["Service"])

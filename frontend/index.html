@@ -57,6 +57,7 @@
 }
 
 *{box-sizing:border-box}
+[hidden]{display:none !important}
 html,body{margin:0;padding:0}
 body{
   background:var(--bg); color:var(--ink); min-height:100vh;
@@ -86,6 +87,16 @@ button,input,select,textarea{font:inherit; color:inherit}
 
 /* ---------- Structure ---------- */
 .app{position:relative; z-index:1; display:grid; grid-template-columns:262px 1fr; min-height:100vh}
+.auth-root{min-height:100vh;position:relative;z-index:5;display:grid;place-items:center;padding:24px}
+.auth-shell{width:min(960px,100%);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);overflow:hidden;border:1px solid var(--line);border-radius:24px;background:var(--surface);box-shadow:var(--shadow-lift)}
+.auth-brand{padding:48px;background:linear-gradient(145deg,var(--indigo),var(--violet));color:#fff;display:flex;flex-direction:column;justify-content:space-between;min-height:520px}
+.auth-brand .brand{padding:0;color:#fff}.auth-brand .brand small{color:rgba(255,255,255,.76)}
+.auth-brand h1{font-size:clamp(2rem,4vw,3.2rem);max-width:430px;margin-top:42px}.auth-brand p{max-width:390px;color:rgba(255,255,255,.82);margin-top:16px}
+.auth-form{padding:40px;display:flex;flex-direction:column;justify-content:center}.auth-form h2{font-size:1.7rem}.auth-form>p{color:var(--ink-2);margin:8px 0 26px}
+.auth-fields{display:grid;gap:14px}.auth-fields label{display:grid;gap:6px;font-size:.78rem;font-weight:700;color:var(--ink-2)}
+.auth-fields input{width:100%;padding:12px 13px;border:1px solid var(--line-2);border-radius:11px;background:var(--surface-2)}
+.auth-actions{display:grid;gap:10px;margin-top:20px}.auth-switch{margin-top:20px;text-align:center;color:var(--ink-2);font-size:.82rem}.auth-switch button{border:0;background:none;color:var(--indigo);font-weight:700;cursor:pointer}
+.auth-error{min-height:20px;color:var(--bad-ink);font-size:.8rem;margin-top:12px}.auth-note{font-size:.72rem;color:var(--ink-3);margin-top:20px}
 .sidebar{position:sticky; top:0; height:100vh; display:flex; flex-direction:column; gap:6px;
   padding:20px 14px 14px; background:color-mix(in srgb, var(--surface) 82%, transparent);
   backdrop-filter:blur(18px); border-right:1px solid var(--line)}
@@ -354,6 +365,11 @@ tbody tr{transition:background .16s} tbody tr:hover{background:var(--surface-2)}
   .formgrid{grid-template-columns:1fr}.intgrid{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){ *{animation:none !important; transition-duration:.01ms !important} }
+@media (max-width:760px){
+  .auth-root{padding:12px}.auth-shell{grid-template-columns:1fr;border-radius:18px}
+  .auth-brand{min-height:0;padding:28px}.auth-brand h1{font-size:2rem;margin-top:24px}
+  .auth-brand p.auth-note{margin-top:24px}.auth-form{padding:28px 22px}
+}
 
 /* ---------- État de connexion au backend ---------- */
 .livebadge{display:inline-flex; align-items:center; gap:7px; font-size:.76rem; font-weight:600; padding:5px 11px;
@@ -369,11 +385,23 @@ tbody tr{transition:background .16s} tbody tr:hover{background:var(--surface-2)}
 .banner b{font-weight:700}
 .location-panel{display:grid;grid-template-columns:1fr auto;gap:12px;margin:14px;border:2px solid var(--indigo);
   border-radius:16px;padding:16px;background:var(--surface);box-shadow:var(--shadow-lift)}
-.location-panel .location-title{grid-column:1/-1;font-size:1rem;font-weight:700;color:var(--ink)}
+.location-panel .location-title{grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:1rem;font-weight:700;color:var(--ink)}
+.location-panel .location-title svg{width:24px;height:24px;flex:none}
 .location-panel .location-help{grid-column:1/-1;font-size:.82rem;color:var(--ink-2)}
 .location-panel input{min-width:0;padding:12px 14px;border:1px solid var(--line-2);border-radius:11px;background:var(--surface-2)}
 .location-panel #test-map{grid-column:1/-1;height:360px;min-height:280px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
 .location-panel .location-status{grid-column:1/-1;min-height:20px;font-size:.78rem;color:var(--ink-3)}
+.location-modal{position:fixed;inset:0;z-index:80;display:grid;place-items:center;overflow:auto;padding:20px;background:rgba(9,10,26,.62)}
+.location-modal .location-panel{position:relative;width:min(900px,100%);max-height:calc(100vh - 40px);overflow:auto;margin:0}
+.location-modal .location-panel #test-map{height:min(55vh,500px);min-height:320px}
+.location-modal .leaflet-container{font:inherit;background:#e8eef5}
+.location-modal .leaflet-pane img{max-width:none}
+.location-map-fallback{height:100%;display:grid;place-items:center;padding:24px;text-align:center;color:var(--ink-2);background:var(--surface-2);font-size:.85rem}
+.location-close{position:absolute;right:14px;top:10px;width:34px;height:34px;border:0;border-radius:50%;background:var(--surface-3);color:var(--ink);font-size:1.35rem;cursor:pointer}
+@media (max-width:600px){
+  .location-modal{padding:10px}.location-modal .location-panel{max-height:calc(100vh - 20px);padding:14px}
+  .location-modal .location-panel #test-map{height:48vh;min-height:250px}
+}
 .testpanel{border:1px dashed var(--line-2); border-radius:14px; padding:12px 14px; margin-bottom:12px; background:var(--surface-2)}
 .testpanel .row{display:flex; align-items:center; gap:9px; flex-wrap:wrap}
 .testpanel select{padding:7px 10px; border-radius:9px; border:1px solid var(--line); background:var(--surface)}
@@ -396,6 +424,7 @@ tbody tr{transition:background .16s} tbody tr:hover{background:var(--surface-2)}
     <main id="view"></main>
   </div>
 </div>
+<div id="auth-root" class="auth-root" hidden></div>
 <div id="toasts" aria-live="polite"></div>
 <script>
 
@@ -417,8 +446,11 @@ tbody tr{transition:background .16s} tbody tr:hover{background:var(--surface-2)}
    ========================================================================== */
 
 const API_BASE = (window.OMNIVENTE_API_BASE || '').replace(/\/+$/, '');
-const TENANT_SLUG = window.OMNIVENTE_TENANT || 'kino-steak';
+let TENANT_SLUG = window.OMNIVENTE_TENANT || 'kino-steak';
 const POLL_MS = 7000;
+const AUTH_STORAGE_KEY = 'omnivente-auth';
+let authSession = null;
+let pollTimer = null;
 
 let LIVE = false;              // passe à true si le backend répond au chargement
 let apiError = null;           // dernier message d'erreur réseau, pour le bandeau
@@ -436,6 +468,95 @@ async function api(path, opts = {}) {
   return res.status === 204 ? null : res.json();
 }
 
+  async function authApi(path, payload) {
+    const res = await fetch(API_BASE + path, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      const detail = await res.text().catch(() => '');
+      let message = 'Impossible de traiter la demande.';
+      try { message = JSON.parse(detail).detail || message; } catch (e) {}
+      throw new Error(message);
+    }
+    return res.json();
+  }
+
+  function readAuthSession() {
+    try {
+      const raw = localStorage.getItem(AUTH_STORAGE_KEY);
+      authSession = raw ? JSON.parse(raw) : null;
+    } catch (e) { authSession = null; }
+    if (authSession?.tenant) TENANT_SLUG = authSession.tenant;
+    return authSession;
+  }
+
+  function saveAuthSession(session) {
+    authSession = session;
+    TENANT_SLUG = session.tenant;
+    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(session));
+  }
+
+  function clearAuthSession() {
+    authSession = null;
+    try { localStorage.removeItem(AUTH_STORAGE_KEY); } catch (e) {}
+    LIVE = false;
+    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+  }
+
+  function renderAuth(mode = 'login', message = '') {
+    const root = $('#auth-root');
+    if (!root) return;
+    document.querySelector('.app').hidden = true;
+    root.hidden = false;
+    const register = mode === 'register';
+    root.innerHTML = `<section class="auth-shell" aria-labelledby="auth-title">
+      <div class="auth-brand">
+        <div class="brand">${LOGO}<div><b>OmniVente</b><small>Commerce conversationnel</small></div></div>
+        <div><div><h1>Votre commerce, au même endroit.</h1><p>Centralisez vos conversations, vos commandes et votre catalogue dans une interface claire et responsive.</p></div>
+        <p class="auth-note">Accès sécurisé pour les équipes commerciales.</p></div>
+      </div>
+      <form class="auth-form" id="auth-form">
+        <h2 id="auth-title">${register ? 'Créer votre compte' : 'Bon retour'}</h2>
+        <p>${register ? 'Configurez votre espace marchand en quelques secondes.' : 'Connectez-vous pour accéder à votre tableau de bord.'}</p>
+        <div class="auth-fields">
+          ${register ? '<label>Nom de l’entreprise<input name="company" required maxlength="160" autocomplete="organization"></label><label>Nom du responsable<input name="manager" required maxlength="120" autocomplete="name"></label>' : ''}
+          <label>Adresse e-mail<input name="email" type="email" required autocomplete="email"></label>
+          <label>Mot de passe<input name="password" type="password" required minlength="8" autocomplete="${register ? 'new-password' : 'current-password'}"></label>
+        </div>
+        <div class="auth-error" role="alert">${esc(message)}</div>
+        <div class="auth-actions"><button class="btn primary" type="submit">${register ? 'Créer le compte' : 'Se connecter'}</button></div>
+        <div class="auth-switch">${register ? 'Vous avez déjà un compte ?' : 'Vous n’avez pas encore de compte ?'} <button type="button" data-auth-mode="${register ? 'login' : 'register'}">${register ? 'Se connecter' : 'Créer un compte'}</button></div>
+      </form>
+    </section>`;
+    $('#auth-form').addEventListener('submit', handleAuthSubmit);
+  }
+
+  async function handleAuthSubmit(event) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+    const register = Boolean(form.elements.company);
+    const button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    try {
+      const session = await authApi(register ? '/auth/register' : '/auth/login', data);
+      saveAuthSession(session);
+      document.querySelector('.app').hidden = false;
+      $('#auth-root').hidden = true;
+      await startDashboard();
+    } catch (error) {
+      renderAuth(register ? 'register' : 'login', error.message);
+    }
+  }
+
+  function logout() {
+    clearAuthSession();
+    state.view = 'dashboard';
+    state.conv = 'live';
+    renderAuth('login', 'Vous êtes déconnecté.');
+  }
 async function checkApi() {
   if (!API_BASE || API_BASE.includes('VOTRE-BACKEND') || API_BASE.includes('TON-BACKEND')) {
     apiError = 'config.js n\u2019a pas encore été renseigné avec l\u2019adresse du backend.';
@@ -1142,15 +1263,17 @@ function showTestLocationControls() {
   const target = $('#testlocation');
   if (!target) return;
   state.locationStep = true;
-  target.innerHTML = `<div class="location-panel">
-    <div class="location-title">${svg(ICON.pin,2)} Localisation de livraison</div>
+  target.innerHTML = `<div class="location-modal" role="dialog" aria-modal="true" aria-labelledby="location-title">
+  <div class="location-panel">
+    <button class="location-close" data-act="closelocation" aria-label="Fermer la localisation">×</button>
+    <div class="location-title" id="location-title">${svg(ICON.pin,2)} Localisation de livraison</div>
     <div class="location-help">Choisissez « Position actuelle » ou cliquez sur la carte, vérifiez l’adresse puis appuyez sur Envoyer.</div>
     <input id="test-location-manual" placeholder="Latitude, longitude ou adresse" aria-label="Position manuelle">
     <button class="btn" data-act="sharetestlocation">${svg(ICON.pin,1.8)}Position actuelle</button>
     <div id="test-map" aria-label="Carte de localisation"></div>
     <div class="location-status" id="location-status" aria-live="polite">Aucune position sélectionnée.</div>
     <button class="btn" data-act="sendtestlocation">${svg(ICON.send,1.8)}Envoyer la localisation</button>
-  </div>`;
+  </div></div>`;
   if (window.L) {
     const map = L.map('test-map').setView([6.13, 1.22], 12);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
@@ -1161,6 +1284,15 @@ function showTestLocationControls() {
       L.marker(event.latlng).addTo(map);
     });
     setTimeout(() => map.invalidateSize(), 100);
+  } else {
+    const mapTarget = $('#test-map');
+    if (mapTarget) {
+      mapTarget.innerHTML = '<div class="location-map-fallback">La carte est indisponible pour le moment. Saisissez une adresse ou des coordonnées ci-dessus.</div>';
+    }
+  }
+  function closeLocationModal() {
+    $('#testlocation').innerHTML = '';
+    state.locationStep = false;
   }
 }
 async function shareTestLocation() {
@@ -1191,7 +1323,7 @@ async function sendManualTestLocation() {
     return;
   }
   const reply = await sendTestMessage(value);
-  if (reply && $('#testlocation')) $('#testlocation').innerHTML = '';
+  if (reply) closeLocationModal();
 }
 function openTestMap() {
   const value = $('#test-location-manual')?.value?.trim() || 'Lome, Togo';
@@ -1263,6 +1395,7 @@ function viewConversationsLive() {
 async function openTestSession(session) {
   state.testSession = session.external_id;
   state.testChannel = session.channel;
+  state.testName = session.name || '';
   state.view = 'test';
   render();
   try {
@@ -1302,6 +1435,7 @@ function viewTestPanel() {
       <div class="row">
         <label for="test-name" style="font-size:.8rem;color:var(--ink-3)">Nom du client :</label>
         <input id="test-name" value="${esc(state.testName)}" placeholder="Ex. Afiwa Segbedji" aria-label="Nom du client test"
+          ${state.testSession ? 'readonly' : ''}
           style="flex:1;min-width:180px;padding:7px 10px;border-radius:9px;border:1px solid var(--line);background:var(--surface)">
         <span style="font-size:.8rem;color:var(--ink-3)">Simuler un client sur :</span>
         <div class="chanpick">${chans.map(([k,c])=>`<button data-testchan="${k}" aria-pressed="${state.testChannel===k}" title="${c.label}" style="color:${state.testChannel===k?c.color:''}">${svgFill(c.icon)}</button>`).join('')}</div>
@@ -1347,24 +1481,24 @@ const DEMO_CONTACT = {name:'Délali Amouzou', phone:'+228 90 77 31 64', channel:
 const DEMO_ARCHIVES = [
   {id:'a1', client:'Afiwa Segbedji', channel:'whatsapp', time:'12 min', ref:'CMD-2026-008',
    preview:'Parfait, à jeudi 14h alors !', msgs:[
-    ['bot','Bonjour Afiwa 👋 Bienvenue chez Tinos TechLogistics.\nVoici notre catalogue :\n1 - Pack Basic (10 000 FCFA)\n2 - Pack Pro (25 000 FCFA)\n3 - Pack Entreprise (50 000 FCFA) — épuisé\n4 - Produit A (15 000 FCFA)\n…\nRépondez par le numéro de votre choix.'],
+    ['bot','Bonjour Afiwa, bienvenue chez Tinos TechLogistics.\nVoici notre catalogue :\n1 - Pack Basic (10 000 FCFA)\n2 - Pack Pro (25 000 FCFA)\n3 - Pack Entreprise (50 000 FCFA) — épuisé\n4 - Produit A (15 000 FCFA)\n…\nRépondez par le numéro de votre choix.'],
     ['me','2'],['bot','Pack Pro (25 000 FCFA). Combien d\u2019exemplaires souhaitez-vous ?'],['me','2'],
     ['bot','2 × Pack Pro = 50 000 FCFA.\nComment souhaitez-vous récupérer votre commande ?\n1 - Livraison à domicile\n2 - Retrait en boutique'],
     ['me','1'],['bot','Quel jour et à quelle heure souhaitez-vous être livrée ?'],['me','Jeudi 14h'],
-    ['bot','Merci. Envoyez votre position pour que le livreur vous trouve.'],['me','📍 6.1319, 1.2492'],
+    ['bot','Merci. Envoyez votre position pour que le livreur vous trouve.'],['me','Position : 6.1319, 1.2492'],
     ['sys','Commande CMD-2026-008 créée · 50 000 FCFA'],['me','Parfait, à jeudi 14h alors !']]},
   {id:'a2', client:'Komlan Adjaho', channel:'instagram', time:'48 min', ref:'CMD-2026-007',
-   preview:'Je passe demain matin 👍', msgs:[
-    ['bot','Bonjour Komlan 👋 Voici notre catalogue :\n1 - Pack Basic (10 000 FCFA)\n…\n4 - Produit A (15 000 FCFA)\nRépondez par le numéro de votre choix.'],
+   preview:'Je passe demain matin', msgs:[
+    ['bot','Bonjour Komlan, voici notre catalogue :\n1 - Pack Basic (10 000 FCFA)\n…\n4 - Produit A (15 000 FCFA)\nRépondez par le numéro de votre choix.'],
     ['me','4'],['bot','Produit A (15 000 FCFA). Combien d\u2019exemplaires ?'],['me','1'],
     ['bot','Comment souhaitez-vous récupérer votre commande ?\n1 - Livraison à domicile\n2 - Retrait en boutique'],['me','2'],
     ['bot','Quel jour et à quelle heure passerez-vous à la boutique Tokoin ?'],['me','Demain 10h30'],
-    ['sys','Commande CMD-2026-007 créée · 15 000 FCFA'],['me','Je passe demain matin 👍']]},
+    ['sys','Commande CMD-2026-007 créée · 15 000 FCFA'],['me','Je passe demain matin']]},
   {id:'a3', client:'Ayéfoumi Tetteh', channel:'messenger', time:'3 j', ref:'CMD-2026-000',
    preview:'D\u2019accord, prévenez-moi au réapprovisionnement.', msgs:[
-    ['bot','Bonjour Ayéfoumi 👋 Voici notre catalogue :\n1 - Pack Basic (10 000 FCFA)\n2 - Pack Pro (25 000 FCFA)\n3 - Pack Entreprise (50 000 FCFA)\nRépondez par le numéro de votre choix.'],
+    ['bot','Bonjour Ayéfoumi, voici notre catalogue :\n1 - Pack Basic (10 000 FCFA)\n2 - Pack Pro (25 000 FCFA)\n3 - Pack Entreprise (50 000 FCFA)\nRépondez par le numéro de votre choix.'],
     ['me','3'],
-    ['bot','Le Pack Entreprise est en rupture de stock pour le moment. 😔\nVoici ce qui est disponible immédiatement :\n2 - Pack Pro (25 000 FCFA)\n5 - Produit B (30 000 FCFA)\nRépondez par un numéro, ou tapez 0 pour être prévenu du réapprovisionnement.'],
+    ['bot','Le Pack Entreprise est en rupture de stock pour le moment.\nVoici ce qui est disponible immédiatement :\n2 - Pack Pro (25 000 FCFA)\n5 - Produit B (30 000 FCFA)\nRépondez par un numéro, ou tapez 0 pour être prévenu du réapprovisionnement.'],
     ['me','0'],['sys','Alerte de réapprovisionnement enregistrée'],['me','D\u2019accord, prévenez-moi au réapprovisionnement.']]}
 ];
 
@@ -1380,7 +1514,7 @@ function alternatives(){
   return PRODUCTS.filter(p=>p.inStock).slice(0,3).map(p=>`${p.n} - ${p.name} (${new Intl.NumberFormat('fr-FR').format(p.price)} FCFA)`).join('\n');
 }
 const QUICK = { catalogue:['1','2','3','4','5'], quantite:['1','2','3','5'], mode:['1','2'],
-  creneau:['Jeudi 10h30','Vendredi 15h00','Samedi matin'], position:['📍 Partager ma position'],
+  creneau:['Jeudi 10h30','Vendredi 15h00','Samedi matin'], position:['Partager ma position'],
   validation:['1','2'], fin:['Nouvelle commande'] };
 
 function setQuick(){
@@ -1403,7 +1537,7 @@ async function botSays(text, delay){
 }
 async function botGreeting(){
   bot=newSession();
-  await botSays(`Bonjour ${DEMO_CONTACT.name.split(' ')[0]} 👋 Bienvenue chez Tinos TechLogistics.`, 500);
+  await botSays(`Bonjour ${DEMO_CONTACT.name.split(' ')[0]}, bienvenue chez Tinos TechLogistics.`, 500);
   await botSays(catalogueText());
   setQuick();
 }
@@ -1420,7 +1554,7 @@ async function handleInput(raw){
       }
       const p=PRODUCTS[n-1];
       if(!p.inStock){
-        await botSays(`Le ${p.name} est en rupture de stock pour le moment. 😔\nVoici ce qui est disponible immédiatement :\n${alternatives()}\n\nRépondez par un numéro.`);
+        await botSays(`Le ${p.name} est en rupture de stock pour le moment.\nVoici ce qui est disponible immédiatement :\n${alternatives()}\n\nRépondez par un numéro.`);
         break;
       }
       bot.product=p;
@@ -1458,7 +1592,7 @@ async function handleInput(raw){
       break;
     }
     case 'position':{
-      bot.place = /position|gps|📍/i.test(text) ? '6.1319, 1.2492 · Bè-Kpota, Lomé' : text;
+      bot.place = /position|gps/i.test(text) ? '6.1319, 1.2492 · Bè-Kpota, Lomé' : text;
       await botSays(summary());
       bot.step='validation'; break;
     }
@@ -1700,6 +1834,8 @@ function toggleTheme(){
 
 /* ------------------------------ Événements ------------------------------ */
 document.addEventListener('click', async (e)=>{
+  const authMode = e.target.closest('[data-auth-mode]');
+  if(authMode){ renderAuth(authMode.dataset.authMode); return; }
   const go_ = e.target.closest('[data-go]'); if(go_){ go(go_.dataset.go); return; }
 
   // Conversations — mode démonstration
@@ -1769,7 +1905,14 @@ document.addEventListener('click', async (e)=>{
     case 'sendtest': await sendTestMessage($('#testinput').value); break;
     case 'sharetestlocation': await shareTestLocation(); break;
     case 'sendtestlocation': await sendManualTestLocation(); break;
-    case 'newtest': state.testSession = null; state.testChannel = 'whatsapp'; state.view = 'test'; render(); break;
+    case 'closelocation': closeLocationModal(); break;
+    case 'newtest':
+      state.testSession = null;
+      state.testName = '';
+      state.testChannel = 'whatsapp';
+      state.view = 'test';
+      render();
+      break;
     case 'saveproduct': await saveProduct(); break;
     case 'clearproduct': render(); break;
     case 'savechannels': await saveChannels(); break;
@@ -1796,7 +1939,7 @@ document.addEventListener('click', async (e)=>{
     case 'cancel': render(); toast('Modifications annulées'); break;
     case 'notif': await toggleNotifications(); break;
     case 'help': toast('Documentation : voir LOCAL_SETUP.md dans le projet'); break;
-    case 'logout': toast('Déconnexion…'); break;
+    case 'logout': logout(); break;
     case 'soon': toast('Création de référence disponible dans le catalogue complet'); break;
   }
 });
@@ -1804,7 +1947,11 @@ document.addEventListener('change', async (e)=>{
   const select = e.target.closest('[data-order-status]');
   if (select) await updateOrderStatus(select.dataset.orderStatus, select.value);
 });
+document.addEventListener('input', (e)=>{
+  if (e.target.id === 'test-name' && !state.testSession) state.testName = e.target.value;
+});
 document.addEventListener('keydown', async (e)=>{
+  if(e.key==='Escape' && state.locationStep){ closeLocationModal(); return; }
   if(e.key==='Enter' && e.target.id==='chatinput'){ e.preventDefault(); await handleInput(e.target.value); }
   if(e.key==='Enter' && e.target.id==='testinput'){ e.preventDefault(); await sendTestMessage(e.target.value); }
   if(e.key==='Enter' && e.target.id==='sellerinput'){ e.preventDefault(); await sendSellerReply(e.target.value); }
@@ -1826,7 +1973,7 @@ window.addEventListener('pointermove', (e)=>{
 /* ------------------------------ Démarrage ------------------------------ */
 try{ const t=localStorage.getItem('omnivente-theme'); if(t) document.documentElement.setAttribute('data-theme',t); }catch(e){}
 
-async function boot(){
+async function startDashboard(){
   loadDemoData();               // toujours prêt, même si l'API échoue juste après
   LIVE = await checkApi();
   if(LIVE){
@@ -1834,7 +1981,19 @@ async function boot(){
     catch(err){ LIVE=false; apiError='Le backend a répondu, mais une requête a échoué : '+err.message; loadDemoData(); }
   }
   render();
-  if(LIVE) setInterval(refreshLiveQuiet, POLL_MS);
+  if(LIVE) {
+    if(pollTimer) clearInterval(pollTimer);
+    pollTimer = setInterval(refreshLiveQuiet, POLL_MS);
+  }
+}
+
+async function boot(){
+  readAuthSession();
+  if (!authSession) {
+    renderAuth('login');
+    return;
+  }
+  await startDashboard();
 }
 boot();
 </script>
