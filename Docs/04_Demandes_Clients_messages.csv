@@ -1,0 +1,401 @@
+﻿message_id,client_id,canal,date,heure,message,statut,temps_reponse_min
+M0001,CL065,Téléphone,2026-09-04,12:50,Le produit reçu n'est pas celui que j'avais commandé.,Répondu,10
+M0002,CL023,Instagram,2026-09-06,17:50,Quels sont les moyens de paiement ?,En cours,
+M0003,CL092,Instagram,2026-09-05,19:50,"Je souhaite commander 5 unités, vous faites une réduction ?",Répondu,10
+M0004,CL083,Email,2026-09-07,14:40,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Nouveau,90
+M0005,CL017,Facebook,2026-09-10,16:20,Quels sont les moyens de paiement ?,Escaladé,720
+M0006,CL009,WhatsApp,2026-09-01,20:50,J'ai payé hier mais ma commande n'est toujours pas livrée.,Nouveau,10
+M0007,CL086,WhatsApp,2026-09-08,21:50,Je veux annuler ma commande.,En cours,45
+M0008,CL099,Instagram,2026-09-02,21:10,C'est disponible à Kara ?,Répondu,720
+M0009,CL009,WhatsApp,2026-09-10,11:00,"Bonjour, combien coûte le pack entreprise ?",Nouveau,
+M0010,CL098,Facebook,2026-09-10,17:00,Merci pour votre service.,Nouveau,180
+M0011,CL014,Email,2026-09-07,09:50,Quels sont les moyens de paiement ?,Escaladé,45
+M0012,CL026,Facebook,2026-09-08,14:50,"Je souhaite commander 5 unités, vous faites une réduction ?",Nouveau,45
+M0013,CL095,Instagram,2026-09-07,20:40,Je voudrais parler au responsable.,Nouveau,10
+M0014,CL075,WhatsApp,2026-09-11,17:00,"Bonjour, je voudrais connaître vos horaires.",Nouveau,20
+M0015,CL001,Facebook,2026-09-13,13:40,Le produit reçu n'est pas celui que j'avais commandé.,Nouveau,180
+M0016,CL024,Téléphone,2026-09-08,10:10,Quels sont les moyens de paiement ?,Répondu,180
+M0017,CL046,Téléphone,2026-09-09,20:10,Je voudrais parler au responsable.,Nouveau,
+M0018,CL055,Email,2026-09-02,16:00,J'ai payé hier mais ma commande n'est toujours pas livrée.,Escaladé,90
+M0019,CL013,WhatsApp,2026-09-08,10:00,Quels sont les moyens de paiement ?,Escaladé,180
+M0020,CL003,Instagram,2026-09-05,21:20,Pouvez-vous m'envoyer votre catalogue ?,En cours,10
+M0021,CL021,Facebook,2026-09-02,15:40,"Bonjour, je voudrais connaître vos horaires.",Escaladé,90
+M0022,CL052,Téléphone,2026-09-01,15:50,Merci pour votre service.,Nouveau,
+M0023,CL034,WhatsApp,2026-09-01,12:30,"Je souhaite commander 5 unités, vous faites une réduction ?",Nouveau,180
+M0024,CL098,WhatsApp,2026-09-03,10:40,Quel est le délai de livraison ?,En cours,5
+M0025,CL031,Email,2026-09-02,19:40,Merci pour votre service.,Escaladé,5
+M0026,CL045,WhatsApp,2026-09-07,16:50,Quels sont les moyens de paiement ?,Nouveau,
+M0027,CL017,Facebook,2026-09-12,07:00,"Bonjour, combien coûte le pack entreprise ?",Répondu,45
+M0028,CL084,Facebook,2026-09-07,14:20,Je voudrais parler au responsable.,Nouveau,5
+M0029,CL008,WhatsApp,2026-09-13,19:10,Le produit reçu n'est pas celui que j'avais commandé.,Escaladé,720
+M0030,CL088,WhatsApp,2026-09-09,14:00,Pouvez-vous m'envoyer votre catalogue ?,Répondu,20
+M0031,CL056,Email,2026-09-09,09:00,Je veux annuler ma commande.,Nouveau,180
+M0032,CL046,Instagram,2026-09-06,13:00,"Bonjour, je voudrais connaître vos horaires.",Nouveau,10
+M0033,CL076,WhatsApp,2026-09-04,13:50,Je voudrais parler au responsable.,Escaladé,5
+M0034,CL002,Instagram,2026-09-01,08:00,J'ai payé hier mais ma commande n'est toujours pas livrée.,Répondu,20
+M0035,CL037,WhatsApp,2026-09-06,12:40,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Nouveau,90
+M0036,CL017,Téléphone,2026-09-07,14:50,Est-ce que le produit A est encore disponible ?,Nouveau,10
+M0037,CL033,Téléphone,2026-09-04,14:50,C'est disponible à Kara ?,En cours,45
+M0038,CL057,Facebook,2026-09-06,19:40,"Je souhaite commander 5 unités, vous faites une réduction ?",Nouveau,90
+M0039,CL041,Téléphone,2026-09-09,08:00,Personne ne répond à mes messages depuis hier.,Répondu,
+M0040,CL036,WhatsApp,2026-09-04,21:10,Quel est le délai de livraison ?,Escaladé,45
+M0041,CL040,Téléphone,2026-09-04,08:20,C'est disponible à Kara ?,Nouveau,5
+M0042,CL031,Email,2026-09-11,19:30,Est-ce que le produit A est encore disponible ?,Nouveau,
+M0043,CL005,Facebook,2026-09-05,16:30,"Je souhaite commander 5 unités, vous faites une réduction ?",Nouveau,5
+M0044,CL036,Téléphone,2026-09-07,14:00,Quel est le délai de livraison ?,Répondu,720
+M0045,CL057,WhatsApp,2026-09-04,10:30,J'ai payé hier mais ma commande n'est toujours pas livrée.,Répondu,5
+M0046,CL085,Facebook,2026-09-01,15:20,Merci pour votre service.,Nouveau,180
+M0047,CL034,Téléphone,2026-09-04,19:00,Personne ne répond à mes messages depuis hier.,Escaladé,720
+M0048,CL055,WhatsApp,2026-09-13,08:40,Pouvez-vous m'envoyer votre catalogue ?,En cours,
+M0049,CL055,Téléphone,2026-09-12,16:40,"Je souhaite commander 5 unités, vous faites une réduction ?",Nouveau,720
+M0050,CL060,Instagram,2026-09-03,21:00,"Je souhaite commander 5 unités, vous faites une réduction ?",En cours,10
+M0051,CL032,Téléphone,2026-09-05,12:40,Pouvez-vous m'envoyer votre catalogue ?,Nouveau,90
+M0052,CL047,Facebook,2026-09-11,11:50,Je voudrais parler au responsable.,Escaladé,5
+M0053,CL016,Facebook,2026-09-10,17:20,Quel est le délai de livraison ?,En cours,20
+M0054,CL057,Email,2026-09-01,14:00,Je veux annuler ma commande.,Nouveau,180
+M0055,CL062,Téléphone,2026-09-04,13:00,Quels sont les moyens de paiement ?,Nouveau,90
+M0056,CL079,Téléphone,2026-09-06,08:30,J'ai payé hier mais ma commande n'est toujours pas livrée.,En cours,90
+M0057,CL034,Email,2026-09-03,10:50,J'ai payé hier mais ma commande n'est toujours pas livrée.,Nouveau,5
+M0058,CL030,WhatsApp,2026-09-11,07:10,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Escaladé,
+M0059,CL075,Facebook,2026-09-01,15:50,"Bonjour, je voudrais connaître vos horaires.",Nouveau,90
+M0060,CL033,WhatsApp,2026-09-11,20:20,Le produit reçu n'est pas celui que j'avais commandé.,Nouveau,45
+M0061,CL045,WhatsApp,2026-09-02,15:30,Est-ce que le produit A est encore disponible ?,Escaladé,10
+M0062,CL031,Instagram,2026-09-06,16:20,Quel est le délai de livraison ?,Répondu,10
+M0063,CL083,Email,2026-09-05,09:00,Personne ne répond à mes messages depuis hier.,Escaladé,180
+M0064,CL043,Email,2026-09-11,12:30,"Je souhaite commander 5 unités, vous faites une réduction ?",Escaladé,5
+M0065,CL021,Facebook,2026-09-01,11:10,Merci pour votre service.,Escaladé,5
+M0066,CL014,Téléphone,2026-09-04,19:20,Le produit reçu n'est pas celui que j'avais commandé.,Escaladé,180
+M0067,CL028,Email,2026-09-10,07:50,C'est disponible à Kara ?,Nouveau,720
+M0068,CL098,WhatsApp,2026-09-02,21:10,Quels sont les moyens de paiement ?,Escaladé,720
+M0069,CL069,WhatsApp,2026-09-09,19:00,Quels sont les moyens de paiement ?,Répondu,
+M0070,CL041,Facebook,2026-09-04,20:40,"Je souhaite commander 5 unités, vous faites une réduction ?",Nouveau,180
+M0071,CL032,Facebook,2026-09-04,14:20,C'est disponible à Kara ?,Nouveau,45
+M0072,CL057,Email,2026-09-06,08:20,Le produit reçu n'est pas celui que j'avais commandé.,Escaladé,10
+M0073,CL047,Email,2026-09-10,10:30,Je voudrais parler au responsable.,Répondu,45
+M0074,CL073,Instagram,2026-09-09,10:30,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Escaladé,20
+M0075,CL078,Facebook,2026-09-13,11:20,Personne ne répond à mes messages depuis hier.,Nouveau,10
+M0076,CL053,Email,2026-09-09,09:40,Je veux annuler ma commande.,Nouveau,20
+M0077,CL059,WhatsApp,2026-09-03,08:30,"Je souhaite commander 5 unités, vous faites une réduction ?",Escaladé,
+M0078,CL096,WhatsApp,2026-09-03,20:00,Quel est le délai de livraison ?,Répondu,5
+M0079,CL089,Instagram,2026-09-02,09:40,Quel est le délai de livraison ?,Escaladé,720
+M0080,CL055,Facebook,2026-09-03,13:50,Le produit reçu n'est pas celui que j'avais commandé.,Nouveau,90
+M0081,CL016,Facebook,2026-09-06,16:40,Quels sont les moyens de paiement ?,Nouveau,5
+M0082,CL010,Facebook,2026-09-08,21:30,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Répondu,720
+M0083,CL038,Email,2026-09-12,09:50,J'ai payé hier mais ma commande n'est toujours pas livrée.,Escaladé,10
+M0084,CL020,WhatsApp,2026-09-10,16:20,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Répondu,720
+M0085,CL042,Email,2026-09-03,15:50,Quels sont les moyens de paiement ?,En cours,10
+M0086,CL030,Facebook,2026-09-08,12:00,Quels sont les moyens de paiement ?,Escaladé,720
+M0087,CL037,Facebook,2026-09-07,12:10,J'ai payé hier mais ma commande n'est toujours pas livrée.,Nouveau,45
+M0088,CL056,Téléphone,2026-09-05,16:40,Personne ne répond à mes messages depuis hier.,Nouveau,180
+M0089,CL037,Instagram,2026-09-02,11:20,Je veux annuler ma commande.,Répondu,45
+M0090,CL022,Facebook,2026-09-05,16:00,Merci pour votre service.,Nouveau,90
+M0091,CL019,WhatsApp,2026-09-04,15:40,Je voudrais parler au responsable.,Nouveau,5
+M0092,CL077,WhatsApp,2026-09-09,15:10,"Bonjour, combien coûte le pack entreprise ?",Répondu,5
+M0093,CL048,Instagram,2026-09-05,16:30,C'est disponible à Kara ?,Répondu,20
+M0094,CL059,Facebook,2026-09-02,18:50,Merci pour votre service.,Nouveau,
+M0095,CL056,Email,2026-09-05,08:10,"Je souhaite commander 5 unités, vous faites une réduction ?",Nouveau,180
+M0096,CL011,Instagram,2026-09-12,08:20,J'ai payé hier mais ma commande n'est toujours pas livrée.,Escaladé,180
+M0097,CL036,Email,2026-09-11,18:40,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Nouveau,180
+M0098,CL005,Email,2026-09-02,21:50,Je voudrais parler au responsable.,Escaladé,180
+M0099,CL025,Téléphone,2026-09-11,20:50,"Bonjour, combien coûte le pack entreprise ?",Nouveau,45
+M0100,CL018,Téléphone,2026-09-07,20:10,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Nouveau,90
+M0101,CL061,Instagram,2026-09-08,20:10,C'est disponible à Kara ?,Répondu,90
+M0102,CL017,Instagram,2026-09-11,21:00,Le produit reçu n'est pas celui que j'avais commandé.,Nouveau,5
+M0103,CL056,WhatsApp,2026-09-08,15:40,"Bonjour, je voudrais connaître vos horaires.",Nouveau,5
+M0104,CL054,Facebook,2026-09-10,13:50,Quels sont les moyens de paiement ?,Nouveau,180
+M0105,CL062,Téléphone,2026-09-11,09:20,Quel est le délai de livraison ?,Nouveau,90
+M0106,CL086,Email,2026-09-08,19:50,Pouvez-vous m'envoyer votre catalogue ?,Escaladé,180
+M0107,CL070,Email,2026-09-05,08:10,Est-ce que le produit A est encore disponible ?,En cours,720
+M0108,CL058,Facebook,2026-09-04,17:30,Est-ce que le produit A est encore disponible ?,Nouveau,
+M0109,CL041,WhatsApp,2026-09-06,18:30,C'est disponible à Kara ?,Nouveau,
+M0110,CL063,Téléphone,2026-09-07,17:10,"Bonjour, combien coûte le pack entreprise ?",En cours,90
+M0111,CL065,Instagram,2026-09-13,13:00,Le produit reçu n'est pas celui que j'avais commandé.,En cours,90
+M0112,CL087,Facebook,2026-09-07,13:30,Pouvez-vous m'envoyer votre catalogue ?,Répondu,90
+M0113,CL007,Facebook,2026-09-08,18:10,Personne ne répond à mes messages depuis hier.,Nouveau,90
+M0114,CL058,Email,2026-09-04,16:10,Le produit reçu n'est pas celui que j'avais commandé.,Nouveau,10
+M0115,CL079,Téléphone,2026-09-06,09:40,Le produit reçu n'est pas celui que j'avais commandé.,Nouveau,5
+M0116,CL049,WhatsApp,2026-09-13,18:20,Merci pour votre service.,En cours,10
+M0117,CL084,WhatsApp,2026-09-09,10:20,Le produit reçu n'est pas celui que j'avais commandé.,Nouveau,20
+M0118,CL069,Email,2026-09-12,10:20,Je voudrais parler au responsable.,Nouveau,180
+M0119,CL043,Email,2026-09-04,15:50,"Bonjour, je voudrais connaître vos horaires.",Nouveau,5
+M0120,CL003,Téléphone,2026-09-02,15:30,Je voudrais parler au responsable.,Répondu,5
+M0121,CL021,Facebook,2026-09-05,07:10,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Nouveau,5
+M0122,CL035,WhatsApp,2026-09-13,13:50,Pouvez-vous m'envoyer votre catalogue ?,Nouveau,90
+M0123,CL011,WhatsApp,2026-09-02,15:50,C'est disponible à Kara ?,Répondu,5
+M0124,CL002,Téléphone,2026-09-10,21:10,Est-ce que le produit A est encore disponible ?,Escaladé,720
+M0125,CL025,Téléphone,2026-09-05,19:20,Pouvez-vous m'envoyer votre catalogue ?,Escaladé,5
+M0126,CL039,Facebook,2026-09-08,10:00,"Je souhaite commander 5 unités, vous faites une réduction ?",Escaladé,
+M0127,CL049,Facebook,2026-09-07,08:10,Pouvez-vous m'envoyer votre catalogue ?,Escaladé,90
+M0128,CL062,Facebook,2026-09-12,15:40,"Bonjour, je voudrais connaître vos horaires.",Répondu,5
+M0129,CL064,Email,2026-09-06,19:40,C'est disponible à Kara ?,Nouveau,
+M0130,CL029,Téléphone,2026-09-01,13:10,Je veux annuler ma commande.,En cours,
+M0131,CL073,WhatsApp,2026-09-11,11:20,J'ai payé hier mais ma commande n'est toujours pas livrée.,Nouveau,10
+M0132,CL072,Instagram,2026-09-04,20:30,Quels sont les moyens de paiement ?,Nouveau,10
+M0133,CL019,Email,2026-09-10,20:30,Le produit reçu n'est pas celui que j'avais commandé.,Escaladé,45
+M0134,CL008,Email,2026-09-05,13:20,C'est disponible à Kara ?,En cours,20
+M0135,CL005,Facebook,2026-09-12,16:40,Pouvez-vous m'envoyer votre catalogue ?,Nouveau,90
+M0136,CL089,Instagram,2026-09-13,15:30,Le produit reçu n'est pas celui que j'avais commandé.,Répondu,180
+M0137,CL084,Instagram,2026-09-06,14:50,Je veux annuler ma commande.,Escaladé,10
+M0138,CL014,Email,2026-09-12,08:30,J'ai payé hier mais ma commande n'est toujours pas livrée.,Nouveau,20
+M0139,CL067,WhatsApp,2026-09-03,10:30,Quel est le délai de livraison ?,Nouveau,5
+M0140,CL055,Email,2026-09-03,17:40,Je veux annuler ma commande.,Nouveau,720
+M0141,CL052,WhatsApp,2026-09-05,08:30,"Je souhaite commander 5 unités, vous faites une réduction ?",En cours,180
+M0142,CL079,Facebook,2026-09-10,17:10,J'ai payé hier mais ma commande n'est toujours pas livrée.,En cours,45
+M0143,CL079,Facebook,2026-09-09,16:20,Je veux annuler ma commande.,Répondu,45
+M0144,CL043,Instagram,2026-09-03,15:50,Quel est le délai de livraison ?,Répondu,5
+M0145,CL041,Email,2026-09-03,09:30,Est-ce que le produit A est encore disponible ?,Nouveau,90
+M0146,CL090,Instagram,2026-09-04,18:00,Le produit reçu n'est pas celui que j'avais commandé.,Répondu,180
+M0147,CL013,WhatsApp,2026-09-10,14:40,J'ai payé hier mais ma commande n'est toujours pas livrée.,Nouveau,180
+M0148,CL082,Téléphone,2026-09-04,12:50,"Bonjour, combien coûte le pack entreprise ?",Nouveau,90
+M0149,CL037,Email,2026-09-10,18:20,Personne ne répond à mes messages depuis hier.,Escaladé,720
+M0150,CL033,Téléphone,2026-09-09,17:50,"Bonjour, je voudrais connaître vos horaires.",Nouveau,20
+M0151,CL014,Instagram,2026-09-05,09:20,Quels sont les moyens de paiement ?,Nouveau,20
+M0152,CL067,Téléphone,2026-09-11,19:30,Personne ne répond à mes messages depuis hier.,Escaladé,90
+M0153,CL095,Téléphone,2026-09-11,21:30,"Bonjour, je voudrais connaître vos horaires.",Nouveau,5
+M0154,CL030,Instagram,2026-09-02,21:40,J'ai payé hier mais ma commande n'est toujours pas livrée.,Nouveau,20
+M0155,CL061,WhatsApp,2026-09-06,08:00,J'ai payé hier mais ma commande n'est toujours pas livrée.,Escaladé,
+M0156,CL055,Email,2026-09-06,11:40,Je voudrais parler au responsable.,Nouveau,45
+M0157,CL072,Email,2026-09-07,19:30,C'est disponible à Kara ?,Répondu,180
+M0158,CL040,Téléphone,2026-09-06,15:00,Merci pour votre service.,Escaladé,45
+M0159,CL022,Facebook,2026-09-12,09:30,Le produit reçu n'est pas celui que j'avais commandé.,Répondu,
+M0160,CL089,Facebook,2026-09-11,08:40,Merci pour votre service.,Répondu,180
+M0161,CL023,WhatsApp,2026-09-06,20:30,Je voudrais parler au responsable.,En cours,720
+M0162,CL028,Téléphone,2026-09-09,21:10,Pouvez-vous m'envoyer votre catalogue ?,En cours,20
+M0163,CL096,WhatsApp,2026-09-04,14:20,Le produit reçu n'est pas celui que j'avais commandé.,Nouveau,5
+M0164,CL076,Facebook,2026-09-06,08:20,Merci pour votre service.,En cours,5
+M0165,CL078,Facebook,2026-09-01,17:20,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Répondu,720
+M0166,CL006,Facebook,2026-09-05,17:00,Quels sont les moyens de paiement ?,Nouveau,
+M0167,CL078,Email,2026-09-08,09:30,C'est disponible à Kara ?,Escaladé,10
+M0168,CL005,Facebook,2026-09-01,16:50,J'ai payé hier mais ma commande n'est toujours pas livrée.,Nouveau,20
+M0169,CL011,Email,2026-09-02,07:30,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Nouveau,180
+M0170,CL013,Téléphone,2026-09-05,20:10,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Escaladé,5
+M0171,CL043,Facebook,2026-09-12,09:40,C'est disponible à Kara ?,En cours,5
+M0172,CL086,Email,2026-09-07,20:50,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Nouveau,10
+M0173,CL025,Téléphone,2026-09-03,18:20,Est-ce que le produit A est encore disponible ?,Nouveau,
+M0174,CL006,Facebook,2026-09-10,10:50,Le produit reçu n'est pas celui que j'avais commandé.,Répondu,20
+M0175,CL082,WhatsApp,2026-09-05,11:40,Personne ne répond à mes messages depuis hier.,Nouveau,180
+M0176,CL060,Téléphone,2026-09-12,08:40,Merci pour votre service.,Répondu,10
+M0177,CL015,WhatsApp,2026-09-03,18:00,J'ai payé hier mais ma commande n'est toujours pas livrée.,En cours,5
+M0178,CL099,Instagram,2026-09-13,07:10,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",En cours,
+M0179,CL011,Instagram,2026-09-05,20:50,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Nouveau,20
+M0180,CL040,WhatsApp,2026-09-07,18:20,J'ai payé hier mais ma commande n'est toujours pas livrée.,En cours,20
+M0181,CL073,Facebook,2026-09-07,10:10,"Je souhaite commander 5 unités, vous faites une réduction ?",Nouveau,20
+M0182,CL038,Facebook,2026-09-12,14:20,Est-ce que le produit A est encore disponible ?,Répondu,180
+M0183,CL075,Facebook,2026-09-06,19:50,Le produit reçu n'est pas celui que j'avais commandé.,Répondu,20
+M0184,CL005,Téléphone,2026-09-07,09:40,Quels sont les moyens de paiement ?,Nouveau,720
+M0185,CL045,Facebook,2026-09-04,12:50,Le produit reçu n'est pas celui que j'avais commandé.,Escaladé,90
+M0186,CL012,Téléphone,2026-09-13,10:20,"Bonjour, je voudrais connaître vos horaires.",Répondu,90
+M0187,CL005,WhatsApp,2026-09-09,17:50,J'ai payé hier mais ma commande n'est toujours pas livrée.,Répondu,20
+M0188,CL060,Téléphone,2026-09-06,12:40,Pouvez-vous m'envoyer votre catalogue ?,Escaladé,5
+M0189,CL042,WhatsApp,2026-09-11,12:00,J'ai payé hier mais ma commande n'est toujours pas livrée.,Répondu,
+M0190,CL043,Facebook,2026-09-11,21:00,J'ai payé hier mais ma commande n'est toujours pas livrée.,En cours,90
+M0191,CL021,Email,2026-09-09,09:00,Je veux annuler ma commande.,Escaladé,
+M0192,CL076,Téléphone,2026-09-12,13:50,Pouvez-vous m'envoyer votre catalogue ?,Répondu,45
+M0193,CL033,Facebook,2026-09-10,12:30,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Répondu,90
+M0194,CL006,Instagram,2026-09-13,21:40,Est-ce que le produit A est encore disponible ?,Répondu,720
+M0195,CL100,Facebook,2026-09-10,13:40,"Bonjour, combien coûte le pack entreprise ?",Nouveau,20
+M0196,CL039,Téléphone,2026-09-12,15:10,Quels sont les moyens de paiement ?,Nouveau,20
+M0197,CL085,Facebook,2026-09-13,07:00,"Je souhaite commander 5 unités, vous faites une réduction ?",Nouveau,180
+M0198,CL059,Email,2026-09-03,14:00,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Nouveau,45
+M0199,CL023,Facebook,2026-09-05,08:10,"Bonjour, je voudrais connaître vos horaires.",Nouveau,720
+M0200,CL012,Instagram,2026-09-03,17:40,Quel est le délai de livraison ?,En cours,5
+M0201,CL062,Instagram,2026-09-06,08:30,Le produit reçu n'est pas celui que j'avais commandé.,Répondu,45
+M0202,CL061,Email,2026-09-08,18:10,Je voudrais parler au responsable.,Nouveau,720
+M0203,CL017,Facebook,2026-09-13,21:10,Pouvez-vous m'envoyer votre catalogue ?,En cours,90
+M0204,CL087,Email,2026-09-10,13:40,Est-ce que le produit A est encore disponible ?,En cours,
+M0205,CL086,Téléphone,2026-09-01,10:40,J'ai payé hier mais ma commande n'est toujours pas livrée.,Nouveau,180
+M0206,CL047,Facebook,2026-09-09,20:00,Quels sont les moyens de paiement ?,Escaladé,720
+M0207,CL010,Instagram,2026-09-03,14:10,"Bonjour, combien coûte le pack entreprise ?",Nouveau,90
+M0208,CL056,WhatsApp,2026-09-06,13:50,J'ai payé hier mais ma commande n'est toujours pas livrée.,Répondu,20
+M0209,CL037,Facebook,2026-09-07,17:30,"Bonjour, combien coûte le pack entreprise ?",En cours,720
+M0210,CL023,Instagram,2026-09-07,17:40,Quel est le délai de livraison ?,Nouveau,
+M0211,CL011,Facebook,2026-09-11,18:00,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Répondu,5
+M0212,CL021,Facebook,2026-09-03,16:40,Pouvez-vous m'envoyer votre catalogue ?,Répondu,5
+M0213,CL063,Email,2026-09-07,19:00,"Je souhaite commander 5 unités, vous faites une réduction ?",Répondu,90
+M0214,CL095,WhatsApp,2026-09-10,19:30,Le produit reçu n'est pas celui que j'avais commandé.,En cours,
+M0215,CL092,Facebook,2026-09-09,12:00,Je voudrais parler au responsable.,Nouveau,720
+M0216,CL069,Email,2026-09-11,08:10,"Bonjour, combien coûte le pack entreprise ?",En cours,90
+M0217,CL026,Téléphone,2026-09-10,18:30,Pouvez-vous m'envoyer votre catalogue ?,Nouveau,
+M0218,CL037,WhatsApp,2026-09-02,20:30,Je veux annuler ma commande.,En cours,5
+M0219,CL077,Facebook,2026-09-05,13:20,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",En cours,5
+M0220,CL070,Facebook,2026-09-03,11:20,Pouvez-vous m'envoyer votre catalogue ?,Nouveau,
+M0221,CL042,Facebook,2026-09-11,07:40,Est-ce que le produit A est encore disponible ?,En cours,5
+M0222,CL069,Email,2026-09-04,09:00,Le produit reçu n'est pas celui que j'avais commandé.,Nouveau,20
+M0223,CL094,Instagram,2026-09-11,14:30,Merci pour votre service.,En cours,180
+M0224,CL059,Téléphone,2026-09-04,21:50,Quel est le délai de livraison ?,Escaladé,
+M0225,CL006,WhatsApp,2026-09-06,12:00,J'ai payé hier mais ma commande n'est toujours pas livrée.,Escaladé,10
+M0226,CL049,Téléphone,2026-09-12,08:20,Merci pour votre service.,En cours,720
+M0227,CL052,WhatsApp,2026-09-03,18:20,C'est disponible à Kara ?,Nouveau,720
+M0228,CL015,Instagram,2026-09-10,11:20,Quels sont les moyens de paiement ?,Escaladé,45
+M0229,CL089,WhatsApp,2026-09-06,16:30,"Bonjour, je voudrais connaître vos horaires.",Répondu,90
+M0230,CL096,Instagram,2026-09-05,15:50,"Bonjour, combien coûte le pack entreprise ?",Escaladé,720
+M0231,CL024,Facebook,2026-09-05,07:30,"Bonjour, je voudrais connaître vos horaires.",Nouveau,720
+M0232,CL085,Instagram,2026-09-05,11:30,Quels sont les moyens de paiement ?,En cours,10
+M0233,CL029,Instagram,2026-09-01,18:20,"Bonjour, je voudrais connaître vos horaires.",Nouveau,90
+M0234,CL094,Téléphone,2026-09-08,16:30,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Escaladé,180
+M0235,CL070,Email,2026-09-08,21:40,"Bonjour, combien coûte le pack entreprise ?",En cours,180
+M0236,CL041,Facebook,2026-09-08,09:30,Quel est le délai de livraison ?,Répondu,45
+M0237,CL069,Instagram,2026-09-11,13:20,Pouvez-vous m'envoyer votre catalogue ?,Nouveau,10
+M0238,CL081,Email,2026-09-09,12:00,"Bonjour, je voudrais connaître vos horaires.",Escaladé,180
+M0239,CL039,Facebook,2026-09-13,12:30,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Répondu,5
+M0240,CL020,Téléphone,2026-09-10,09:40,Personne ne répond à mes messages depuis hier.,Escaladé,720
+M0241,CL054,WhatsApp,2026-09-13,11:40,C'est disponible à Kara ?,Répondu,45
+M0242,CL049,Téléphone,2026-09-03,13:40,Quel est le délai de livraison ?,Nouveau,10
+M0243,CL051,Instagram,2026-09-04,08:40,"Je souhaite commander 5 unités, vous faites une réduction ?",Nouveau,20
+M0244,CL099,Email,2026-09-09,13:20,Je voudrais parler au responsable.,Nouveau,720
+M0245,CL077,Facebook,2026-09-06,19:20,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Nouveau,180
+M0246,CL065,Téléphone,2026-09-09,13:10,Quel est le délai de livraison ?,Répondu,
+M0247,CL097,Email,2026-09-05,20:30,J'ai payé hier mais ma commande n'est toujours pas livrée.,Nouveau,720
+M0248,CL037,WhatsApp,2026-09-09,20:20,Je voudrais parler au responsable.,Répondu,20
+M0249,CL088,WhatsApp,2026-09-07,16:50,Pouvez-vous m'envoyer votre catalogue ?,Répondu,720
+M0250,CL025,WhatsApp,2026-09-10,10:10,Quels sont les moyens de paiement ?,Escaladé,10
+M0251,CL077,Téléphone,2026-09-12,13:00,Personne ne répond à mes messages depuis hier.,Escaladé,45
+M0252,CL022,Téléphone,2026-09-11,14:50,Est-ce que le produit A est encore disponible ?,En cours,5
+M0253,CL096,Téléphone,2026-09-13,17:30,Le produit reçu n'est pas celui que j'avais commandé.,Escaladé,45
+M0254,CL021,Email,2026-09-06,18:10,J'ai payé hier mais ma commande n'est toujours pas livrée.,Répondu,45
+M0255,CL042,Instagram,2026-09-05,08:00,"Bonjour, je voudrais connaître vos horaires.",Escaladé,
+M0256,CL059,Instagram,2026-09-11,16:30,"Bonjour, je voudrais connaître vos horaires.",Nouveau,
+M0257,CL065,WhatsApp,2026-09-13,16:20,Quel est le délai de livraison ?,Nouveau,45
+M0258,CL060,WhatsApp,2026-09-01,18:00,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Répondu,
+M0259,CL050,WhatsApp,2026-09-13,13:20,Merci pour votre service.,Escaladé,10
+M0260,CL092,Téléphone,2026-09-11,15:50,"Bonjour, combien coûte le pack entreprise ?",Répondu,
+M0261,CL093,WhatsApp,2026-09-05,19:30,Quel est le délai de livraison ?,Nouveau,180
+M0262,CL052,Téléphone,2026-09-11,17:30,Pouvez-vous m'envoyer votre catalogue ?,Nouveau,10
+M0263,CL019,Facebook,2026-09-13,20:40,Je voudrais parler au responsable.,Nouveau,20
+M0264,CL047,Email,2026-09-11,12:10,Merci pour votre service.,Nouveau,
+M0265,CL027,Facebook,2026-09-02,12:50,C'est disponible à Kara ?,Nouveau,
+M0266,CL091,Email,2026-09-13,10:20,Personne ne répond à mes messages depuis hier.,En cours,
+M0267,CL043,Email,2026-09-12,11:40,"Je souhaite commander 5 unités, vous faites une réduction ?",Escaladé,5
+M0268,CL098,Instagram,2026-09-03,15:20,"Bonjour, combien coûte le pack entreprise ?",Nouveau,180
+M0269,CL073,Facebook,2026-09-12,11:20,C'est disponible à Kara ?,Nouveau,90
+M0270,CL061,Email,2026-09-11,11:10,C'est disponible à Kara ?,Nouveau,20
+M0271,CL078,Facebook,2026-09-07,11:50,"Bonjour, je voudrais connaître vos horaires.",Nouveau,45
+M0272,CL075,Facebook,2026-09-03,16:00,"Je souhaite commander 5 unités, vous faites une réduction ?",En cours,720
+M0273,CL062,Téléphone,2026-09-03,12:50,J'ai payé hier mais ma commande n'est toujours pas livrée.,Escaladé,180
+M0274,CL067,Facebook,2026-09-07,20:30,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Nouveau,
+M0275,CL023,Email,2026-09-07,07:50,Est-ce que le produit A est encore disponible ?,En cours,45
+M0276,CL040,Instagram,2026-09-04,09:20,Quels sont les moyens de paiement ?,Nouveau,45
+M0277,CL046,Email,2026-09-08,16:50,Merci pour votre service.,Nouveau,45
+M0278,CL095,Instagram,2026-09-06,17:00,Pouvez-vous m'envoyer votre catalogue ?,Nouveau,180
+M0279,CL065,WhatsApp,2026-09-05,15:40,Quel est le délai de livraison ?,Escaladé,10
+M0280,CL008,Email,2026-09-10,15:10,"Bonjour, je voudrais connaître vos horaires.",En cours,20
+M0281,CL089,Instagram,2026-09-04,18:50,Je veux annuler ma commande.,Nouveau,5
+M0282,CL078,Facebook,2026-09-09,11:00,C'est disponible à Kara ?,Nouveau,10
+M0283,CL017,Téléphone,2026-09-05,07:10,"Bonjour, je voudrais connaître vos horaires.",Nouveau,
+M0284,CL060,WhatsApp,2026-09-09,21:00,Personne ne répond à mes messages depuis hier.,Nouveau,45
+M0285,CL062,WhatsApp,2026-09-08,08:30,"Bonjour, je voudrais connaître vos horaires.",Nouveau,45
+M0286,CL077,Email,2026-09-05,16:00,Quels sont les moyens de paiement ?,Répondu,10
+M0287,CL093,Email,2026-09-13,17:10,Quels sont les moyens de paiement ?,Escaladé,
+M0288,CL001,Facebook,2026-09-13,13:40,"Je souhaite commander 5 unités, vous faites une réduction ?",Répondu,20
+M0289,CL043,Téléphone,2026-09-08,15:20,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",En cours,90
+M0290,CL069,Instagram,2026-09-06,11:50,Le produit reçu n'est pas celui que j'avais commandé.,Escaladé,90
+M0291,CL081,Email,2026-09-02,19:10,Je veux annuler ma commande.,Nouveau,180
+M0292,CL066,Email,2026-09-08,09:10,Est-ce que le produit A est encore disponible ?,Répondu,90
+M0293,CL013,Email,2026-09-06,17:50,Le produit reçu n'est pas celui que j'avais commandé.,Nouveau,45
+M0294,CL100,WhatsApp,2026-09-13,10:10,"Je souhaite commander 5 unités, vous faites une réduction ?",Escaladé,90
+M0295,CL041,Téléphone,2026-09-08,08:50,"Je souhaite commander 5 unités, vous faites une réduction ?",Escaladé,45
+M0296,CL074,Instagram,2026-09-06,09:10,Je voudrais parler au responsable.,Répondu,20
+M0297,CL021,Téléphone,2026-09-11,09:20,Le produit reçu n'est pas celui que j'avais commandé.,Répondu,720
+M0298,CL100,Facebook,2026-09-04,21:20,Je veux annuler ma commande.,En cours,180
+M0299,CL019,Facebook,2026-09-06,18:20,Quel est le délai de livraison ?,En cours,
+M0300,CL040,Email,2026-09-10,13:30,"Bonjour, combien coûte le pack entreprise ?",Répondu,5
+M0301,CL053,Facebook,2026-09-11,19:10,Je veux annuler ma commande.,En cours,5
+M0302,CL091,Instagram,2026-09-04,17:50,"Je souhaite commander 5 unités, vous faites une réduction ?",En cours,180
+M0303,CL004,Facebook,2026-09-07,19:30,Personne ne répond à mes messages depuis hier.,Escaladé,45
+M0304,CL028,Téléphone,2026-09-09,14:20,Est-ce que le produit A est encore disponible ?,Nouveau,45
+M0305,CL021,Facebook,2026-09-12,14:50,Quels sont les moyens de paiement ?,Répondu,5
+M0306,CL100,Email,2026-09-12,21:50,Je veux annuler ma commande.,Nouveau,90
+M0307,CL078,Téléphone,2026-09-07,07:00,"Bonjour, combien coûte le pack entreprise ?",En cours,90
+M0308,CL069,Facebook,2026-09-08,21:20,Est-ce que le produit A est encore disponible ?,Répondu,20
+M0309,CL096,WhatsApp,2026-09-06,19:50,Pouvez-vous m'envoyer votre catalogue ?,Nouveau,20
+M0310,CL076,Facebook,2026-09-10,10:40,Est-ce que le produit A est encore disponible ?,Répondu,45
+M0311,CL042,Téléphone,2026-09-09,19:50,"Je souhaite commander 5 unités, vous faites une réduction ?",Escaladé,90
+M0312,CL089,WhatsApp,2026-09-03,19:00,Quel est le délai de livraison ?,En cours,180
+M0313,CL099,Email,2026-09-12,21:10,J'ai payé hier mais ma commande n'est toujours pas livrée.,En cours,
+M0314,CL030,Email,2026-09-06,12:10,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",En cours,90
+M0315,CL078,WhatsApp,2026-09-03,08:50,Pouvez-vous m'envoyer votre catalogue ?,Répondu,720
+M0316,CL063,WhatsApp,2026-09-09,07:40,Personne ne répond à mes messages depuis hier.,Nouveau,720
+M0317,CL005,Téléphone,2026-09-13,12:40,Je veux annuler ma commande.,En cours,180
+M0318,CL082,WhatsApp,2026-09-12,08:40,Est-ce que le produit A est encore disponible ?,Escaladé,10
+M0319,CL069,Instagram,2026-09-13,15:00,Quels sont les moyens de paiement ?,Répondu,45
+M0320,CL097,WhatsApp,2026-09-13,17:30,Quel est le délai de livraison ?,En cours,
+M0321,CL058,Instagram,2026-09-11,12:00,J'ai payé hier mais ma commande n'est toujours pas livrée.,Escaladé,180
+M0322,CL059,Téléphone,2026-09-13,18:50,Quel est le délai de livraison ?,Répondu,5
+M0323,CL052,Téléphone,2026-09-05,07:40,Quel est le délai de livraison ?,Répondu,5
+M0324,CL002,Instagram,2026-09-06,13:10,"Je souhaite commander 5 unités, vous faites une réduction ?",Nouveau,180
+M0325,CL069,Email,2026-09-11,17:10,Je voudrais parler au responsable.,Escaladé,180
+M0326,CL092,Téléphone,2026-09-03,10:10,"Bonjour, je voudrais connaître vos horaires.",En cours,20
+M0327,CL013,WhatsApp,2026-09-09,16:00,Je voudrais parler au responsable.,Nouveau,180
+M0328,CL009,Facebook,2026-09-06,21:10,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Nouveau,45
+M0329,CL039,Instagram,2026-09-07,11:10,Merci pour votre service.,Nouveau,180
+M0330,CL004,Instagram,2026-09-08,08:30,"Bonjour, combien coûte le pack entreprise ?",Répondu,45
+M0331,CL049,WhatsApp,2026-09-08,14:30,"Bonjour, je voudrais connaître vos horaires.",Nouveau,720
+M0332,CL076,WhatsApp,2026-09-02,09:40,Merci pour votre service.,Escaladé,10
+M0333,CL021,Instagram,2026-09-02,14:50,Quels sont les moyens de paiement ?,En cours,180
+M0334,CL054,Instagram,2026-09-04,08:40,Personne ne répond à mes messages depuis hier.,Répondu,90
+M0335,CL066,WhatsApp,2026-09-08,07:00,Pouvez-vous m'envoyer votre catalogue ?,Répondu,720
+M0336,CL013,Facebook,2026-09-06,11:00,Pouvez-vous m'envoyer votre catalogue ?,En cours,45
+M0337,CL090,WhatsApp,2026-09-11,17:30,Merci pour votre service.,Répondu,5
+M0338,CL036,Facebook,2026-09-01,09:10,J'ai payé hier mais ma commande n'est toujours pas livrée.,Escaladé,5
+M0339,CL017,Téléphone,2026-09-03,09:50,Je veux annuler ma commande.,Nouveau,5
+M0340,CL077,Instagram,2026-09-12,17:20,Personne ne répond à mes messages depuis hier.,Escaladé,720
+M0341,CL021,Email,2026-09-03,09:40,J'ai payé hier mais ma commande n'est toujours pas livrée.,Nouveau,180
+M0342,CL015,Instagram,2026-09-01,14:10,"Je souhaite commander 5 unités, vous faites une réduction ?",Répondu,180
+M0343,CL034,Téléphone,2026-09-06,07:00,Personne ne répond à mes messages depuis hier.,Nouveau,
+M0344,CL005,Instagram,2026-09-07,07:40,Pouvez-vous m'envoyer votre catalogue ?,Escaladé,20
+M0345,CL021,WhatsApp,2026-09-01,12:10,Est-ce que le produit A est encore disponible ?,Répondu,10
+M0346,CL015,Email,2026-09-08,13:40,Je veux annuler ma commande.,Nouveau,5
+M0347,CL040,Email,2026-09-08,21:20,J'ai payé hier mais ma commande n'est toujours pas livrée.,En cours,180
+M0348,CL079,WhatsApp,2026-09-08,14:50,Quel est le délai de livraison ?,Escaladé,45
+M0349,CL017,Instagram,2026-09-09,09:10,"Bonjour, je voudrais connaître vos horaires.",Nouveau,10
+M0350,CL092,Email,2026-09-05,21:40,Est-ce que le produit A est encore disponible ?,Nouveau,45
+M0351,CL033,Instagram,2026-09-12,17:20,Personne ne répond à mes messages depuis hier.,Répondu,90
+M0352,CL098,Instagram,2026-09-06,13:20,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Nouveau,5
+M0353,CL096,Email,2026-09-11,07:10,J'ai payé hier mais ma commande n'est toujours pas livrée.,Nouveau,20
+M0354,CL082,WhatsApp,2026-09-13,10:10,Pouvez-vous m'envoyer votre catalogue ?,En cours,5
+M0355,CL074,Email,2026-09-08,20:20,"Bonjour, je voudrais connaître vos horaires.",Escaladé,720
+M0356,CL058,Instagram,2026-09-08,16:20,Le produit reçu n'est pas celui que j'avais commandé.,Répondu,10
+M0357,CL096,Facebook,2026-09-11,19:40,Merci pour votre service.,En cours,180
+M0358,CL024,Facebook,2026-09-06,19:30,Je voudrais parler au responsable.,Escaladé,
+M0359,CL085,WhatsApp,2026-09-11,20:20,Je voudrais parler au responsable.,Escaladé,90
+M0360,CL009,Facebook,2026-09-07,17:00,Le produit reçu n'est pas celui que j'avais commandé.,Nouveau,10
+M0361,CL030,Email,2026-09-02,08:40,C'est disponible à Kara ?,En cours,20
+M0362,CL045,Facebook,2026-09-08,13:40,Est-ce que le produit A est encore disponible ?,Escaladé,20
+M0363,CL051,Téléphone,2026-09-04,09:50,"Bonjour, je voudrais connaître vos horaires.",Nouveau,45
+M0364,CL094,Facebook,2026-09-09,16:10,Quels sont les moyens de paiement ?,Escaladé,5
+M0365,CL069,Facebook,2026-09-09,10:50,Le produit reçu n'est pas celui que j'avais commandé.,Nouveau,180
+M0366,CL021,WhatsApp,2026-09-11,09:50,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",Escaladé,45
+M0367,CL097,Instagram,2026-09-09,16:30,Quel est le délai de livraison ?,Nouveau,90
+M0368,CL007,Email,2026-09-05,13:40,Pouvez-vous m'envoyer votre catalogue ?,Répondu,
+M0369,CL042,Instagram,2026-09-12,11:00,Est-ce que le produit A est encore disponible ?,En cours,90
+M0370,CL027,Téléphone,2026-09-10,08:00,Je voudrais parler au responsable.,Répondu,20
+M0371,CL019,Email,2026-09-03,19:10,Pouvez-vous m'envoyer votre catalogue ?,Nouveau,720
+M0372,CL051,Téléphone,2026-09-04,10:20,Est-ce que le produit A est encore disponible ?,Nouveau,90
+M0373,CL018,Email,2026-09-02,18:50,Quels sont les moyens de paiement ?,Nouveau,45
+M0374,CL057,Instagram,2026-09-11,11:20,"Bonjour, combien coûte le pack entreprise ?",Nouveau,90
+M0375,CL068,WhatsApp,2026-09-13,17:40,Je veux annuler ma commande.,Nouveau,
+M0376,CL039,WhatsApp,2026-09-09,18:40,Je veux annuler ma commande.,Nouveau,10
+M0377,CL097,Facebook,2026-09-05,07:30,Quel est le délai de livraison ?,En cours,10
+M0378,CL081,Email,2026-09-07,16:10,Merci pour votre service.,Répondu,90
+M0379,CL029,Téléphone,2026-09-02,08:50,Quels sont les moyens de paiement ?,Escaladé,180
+M0380,CL031,Email,2026-09-12,13:30,"Bonjour, combien coûte le pack entreprise ?",Nouveau,90
+M0381,CL093,Facebook,2026-09-05,17:40,Personne ne répond à mes messages depuis hier.,Répondu,90
+M0382,CL046,WhatsApp,2026-09-01,08:50,Je voudrais parler au responsable.,Répondu,45
+M0383,CL075,Email,2026-09-04,16:30,"Je suis intéressé par votre offre entreprise, pouvez-vous me rappeler ?",En cours,10
+M0384,CL100,Email,2026-09-09,16:40,Pouvez-vous m'envoyer votre catalogue ?,Escaladé,720
+M0385,CL006,Téléphone,2026-09-02,16:50,Est-ce que le produit A est encore disponible ?,Escaladé,10
+M0386,CL016,Instagram,2026-09-06,16:50,C'est disponible à Kara ?,Escaladé,720
+M0387,CL051,WhatsApp,2026-09-06,17:30,Quel est le délai de livraison ?,Répondu,5
+M0388,CL052,Email,2026-09-11,21:00,"Bonjour, je voudrais connaître vos horaires.",Escaladé,20
+M0389,CL004,Facebook,2026-09-02,11:30,Je voudrais parler au responsable.,Nouveau,
+M0390,CL033,Facebook,2026-09-11,12:20,"Bonjour, je voudrais connaître vos horaires.",En cours,
+M0391,CL007,Facebook,2026-09-08,18:50,"Je souhaite commander 5 unités, vous faites une réduction ?",Nouveau,45
+M0392,CL072,Téléphone,2026-09-11,12:50,Pouvez-vous m'envoyer votre catalogue ?,En cours,20
+M0393,CL064,WhatsApp,2026-09-06,12:40,Le produit reçu n'est pas celui que j'avais commandé.,Nouveau,180
+M0394,CL040,WhatsApp,2026-09-12,08:50,Pouvez-vous m'envoyer votre catalogue ?,En cours,
+M0395,CL082,Instagram,2026-09-13,13:10,"Je souhaite commander 5 unités, vous faites une réduction ?",Répondu,180
+M0396,CL044,Email,2026-09-06,19:10,J'ai payé hier mais ma commande n'est toujours pas livrée.,En cours,5
+M0397,CL015,Instagram,2026-09-10,11:40,C'est disponible à Kara ?,Escaladé,90
+M0398,CL097,Téléphone,2026-09-09,09:30,Quels sont les moyens de paiement ?,Nouveau,45
+M0399,CL012,WhatsApp,2026-09-12,16:50,Pouvez-vous m'envoyer votre catalogue ?,En cours,20
+M0400,CL092,Facebook,2026-09-09,12:30,J'ai payé hier mais ma commande n'est toujours pas livrée.,Répondu,10

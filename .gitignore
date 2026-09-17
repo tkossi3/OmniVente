@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+.DS_Store
+package-lock.json
+package.json
+.bin/
+.xdg/
+../.xdg/

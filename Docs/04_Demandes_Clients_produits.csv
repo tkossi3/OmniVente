@@ -1,0 +1,9 @@
+﻿produit_id,produit,prix_fcfa,disponibilite
+P01,Pack Basic,10000,Oui
+P02,Pack Pro,25000,Oui
+P03,Pack Entreprise,50000,Non
+P04,Produit A,15000,Oui
+P05,Produit B,30000,Oui
+P06,Service Livraison,5000,Oui
+P07,Abonnement Mensuel,20000,Oui
+P08,Formation,75000,Oui

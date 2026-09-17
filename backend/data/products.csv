@@ -1,0 +1,9 @@
+ref,name,price,stock_status,quantity,category
+P01,Pack Basic,10000,En stock,42,Packs
+P02,Pack Pro,25000,En stock,18,Packs
+P03,Pack Entreprise,50000,Rupture,0,Packs
+P04,Produit A,15000,En stock,64,Produits
+P05,Produit B,30000,En stock,27,Produits
+P06,Service Livraison,5000,En stock,999,Services
+P07,Abonnement Mensuel,20000,En stock,120,Services
+P08,Formation,75000,En stock,12,Formation
