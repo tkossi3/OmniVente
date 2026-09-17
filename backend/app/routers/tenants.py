@@ -38,7 +38,7 @@ def read_integrations(tenant: Tenant = Depends(get_tenant)):
     for block in data.values():
         if isinstance(block, dict):
             for key in list(block):
-                if any(word in key for word in ("token", "secret", "password")):
+                if any(word in key.lower() for word in ("token", "secret", "password")):
                     block[key] = "••••••••"
     return data
 
@@ -47,7 +47,14 @@ def read_integrations(tenant: Tenant = Depends(get_tenant)):
 def update_integrations(payload: IntegrationsIn, db: Session = Depends(get_db),
                         tenant: Tenant = Depends(get_tenant)):
     current = dict(tenant.integrations or {})
-    current.update(payload.model_dump(exclude_none=True))
+    for channel, block in payload.model_dump(exclude_none=True).items():
+        if block is None:
+            continue
+        saved = dict(current.get(channel) or {})
+        for key, value in block.items():
+            if value not in (None, "", "••••••••"):
+                saved[key] = value
+        current[channel] = saved
     tenant.integrations = current
     db.commit()
     return {"status": "saved"}

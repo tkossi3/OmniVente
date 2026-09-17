@@ -25,8 +25,10 @@ def _verify(request: Request, expected: str) -> PlainTextResponse:
 
 
 @router.get("/whatsapp/{slug}")
-def verify_whatsapp(slug: str, request: Request):
-    return _verify(request, settings.whatsapp_verify_token)
+def verify_whatsapp(slug: str, request: Request,
+                    tenant: Tenant = Depends(get_tenant_by_slug)):
+    token = (tenant.integrations or {}).get("whatsapp", {}).get("verify_token")
+    return _verify(request, token or settings.whatsapp_verify_token)
 
 
 @router.post("/whatsapp/{slug}")
@@ -48,13 +50,16 @@ async def receive_whatsapp(slug: str, request: Request, db: Session = Depends(ge
                 reply = process_incoming(db, tenant, ChatIn(
                     channel="whatsapp", external_id=sender,
                     name=profiles.get(sender, "Client"), text=text))
-                channels.send_whatsapp(sender, reply.reply)
+                channels.send_whatsapp(sender, reply.reply,
+                                       (tenant.integrations or {}).get("whatsapp"))
     return {"status": "received"}
 
 
 @router.get("/meta/{slug}")
-def verify_meta(slug: str, request: Request):
-    return _verify(request, settings.meta_verify_token)
+def verify_meta(slug: str, request: Request,
+                tenant: Tenant = Depends(get_tenant_by_slug)):
+    token = (tenant.integrations or {}).get("meta", {}).get("verify_token")
+    return _verify(request, token or settings.meta_verify_token)
 
 
 @router.post("/meta/{slug}")
@@ -70,7 +75,8 @@ async def receive_meta(slug: str, request: Request, db: Session = Depends(get_db
                 continue
             reply = process_incoming(db, tenant, ChatIn(
                 channel=platform, external_id=sender, name="Client", text=text))
-            channels.send_meta(sender, reply.reply, platform)
+            channels.send_meta(sender, reply.reply, platform,
+                               (tenant.integrations or {}).get("meta"))
     return {"status": "received"}
 
 
@@ -85,5 +91,5 @@ async def receive_email(slug: str, request: Request, db: Session = Depends(get_d
         raise HTTPException(422, "Expéditeur manquant.")
     reply = process_incoming(db, tenant, ChatIn(
         channel="email", external_id=sender, name=body.get("name", "Client"), text=text))
-    channels.send_email(sender, reply.reply)
+    channels.send_email(sender, reply.reply, config=(tenant.integrations or {}).get("email"))
     return {"status": "received"}

@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 /* ============================================================
    OMNIVENTE — DESIGN SYSTEM
@@ -222,6 +224,8 @@ main{padding:24px 26px 56px; max-width:1560px; width:100%}
 .prodgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px}
 .prod{padding:16px; border-radius:15px; background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow);
   display:flex; flex-direction:column; gap:9px; transition:transform .2s, box-shadow .2s}
+.prod-actions{display:grid;grid-template-columns:1fr auto auto auto;gap:7px;margin-top:4px}
+.prod-actions .btn:first-child{min-width:0}
 .prod:hover{transform:translateY(-3px); box-shadow:var(--shadow-lift)}
 .prod .sku{font-size:.72rem; color:var(--ink-3); font-variant-numeric:tabular-nums}
 .prod .name{font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:1.06rem; letter-spacing:-.02em}
@@ -234,6 +238,14 @@ main{padding:24px 26px 56px; max-width:1560px; width:100%}
 .convwrap{display:grid; grid-template-columns:300px minmax(0,1fr); gap:16px; align-items:start}
 .convlist{padding:8px; max-height:74vh; overflow-y:auto}
 .convitem{display:flex; gap:11px; padding:11px; border-radius:12px; border:0; background:transparent; width:100%; cursor:pointer; text-align:left}
+.convitem-wrap{display:flex;align-items:center;gap:3px;border-radius:12px}
+.convitem-wrap{position:relative;display:block}
+.convitem-wrap:hover{background:var(--surface-3)}
+.convitem-wrap .convitem{flex:1}
+.convitem-wrap>.iconbtn{position:absolute;right:8px;bottom:5px;opacity:0;z-index:2;width:24px;height:24px}
+.convitem-wrap:hover>.iconbtn,.convitem-wrap:focus-within>.iconbtn{opacity:1}
+.convitem-wrap:hover .convitem p{padding-right:28px}
+.iconbtn.danger{color:var(--bad-ink);font-size:1.2rem}
 .convitem:hover{background:var(--surface-3)}
 .convitem[aria-current="true"]{background:var(--info-bg)}
 .convitem .av{width:36px; height:36px; border-radius:11px; flex:none; display:grid; place-items:center; font-weight:700; font-size:.8rem; color:#fff}
@@ -271,6 +283,8 @@ main{padding:24px 26px 56px; max-width:1560px; width:100%}
 .inputrow{display:flex; gap:9px}
 .inputrow input{flex:1; padding:11px 14px; border-radius:12px; border:1px solid var(--line); background:var(--surface); outline:none}
 .inputrow input:focus{border-color:var(--indigo)}
+.chathead .thread-actions{margin-left:auto;display:flex;align-items:center;gap:7px}
+.thread-actions .modelchip{margin-left:0}
 
 /* ---------- Formulaires : pleine largeur ---------- */
 .formgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(252px,1fr)); gap:15px}
@@ -311,6 +325,11 @@ tbody tr{transition:background .16s} tbody tr:hover{background:var(--surface-2)}
 @keyframes toastin{from{opacity:0; transform:translateX(24px)}}
 .toast svg{width:16px; height:16px; color:var(--emerald); flex:none}
 .toast.out{opacity:0; transform:translateX(24px); transition:opacity .3s, transform .3s}
+.notifpanel{position:absolute;right:18px;top:58px;width:min(360px,calc(100vw - 32px));z-index:30;background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lift);padding:12px}
+.notifpanel h3{font-size:.95rem;padding:3px 4px 9px}
+.notifitem{display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--line);background:transparent;padding:10px 4px;cursor:pointer}
+.notifitem b{display:block;font-size:.8rem}.notifitem span{display:block;color:var(--ink-2);font-size:.76rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* ---------- Responsive ---------- */
 @media (max-width:1180px){ .grid2{grid-template-columns:1fr} .convwrap{grid-template-columns:1fr} .convlist{max-height:none} }
@@ -321,6 +340,18 @@ tbody tr{transition:background .16s} tbody tr:hover{background:var(--surface-2)}
   .sidebar.open{transform:none}
   .burger{display:grid} .search{display:none} main{padding:18px 15px 48px} .topbar{padding:11px 15px}
   .scrim{position:fixed; inset:0; background:rgba(9,10,26,.5); z-index:50; backdrop-filter:blur(2px)}
+}
+@media (max-width:600px){
+  h1{font-size:1.4rem} h2{font-size:1.12rem}
+  .topbar{gap:8px}.topbar .crumb{min-width:0;flex:1}.topbar .livebadge,.topbar>.btn{display:none}
+  .card.pad{padding:14px}.prodgrid{grid-template-columns:1fr}
+  .prod-actions{grid-template-columns:1fr 1fr}.prod-actions .btn:first-child{grid-column:1/-1}
+  .chat{height:calc(100vh - 150px);min-height:470px}.chathead{padding:11px}.chathead>div{min-width:0}
+  .chathead .modelchip{font-size:0;padding:7px}.chathead .modelchip .pulse{margin:0}
+  .chathead .thread-actions{gap:4px}.thread-actions .btn{padding:6px 8px;font-size:.72rem}
+  .stream{padding:12px}.bub{max-width:90%;font-size:.84rem}.composer{padding:9px}
+  .inputrow{align-items:stretch}.inputrow input{min-width:0}.inputrow .btn{padding-inline:10px}
+  .formgrid{grid-template-columns:1fr}.intgrid{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){ *{animation:none !important; transition-duration:.01ms !important} }
 
@@ -336,6 +367,13 @@ tbody tr{transition:background .16s} tbody tr:hover{background:var(--surface-2)}
   background:var(--warn-bg); color:var(--warn-ink); font-size:.85rem; border:1px solid transparent}
 .banner svg{width:17px; height:17px; flex:none}
 .banner b{font-weight:700}
+.location-panel{display:grid;grid-template-columns:1fr auto;gap:12px;margin:14px;border:2px solid var(--indigo);
+  border-radius:16px;padding:16px;background:var(--surface);box-shadow:var(--shadow-lift)}
+.location-panel .location-title{grid-column:1/-1;font-size:1rem;font-weight:700;color:var(--ink)}
+.location-panel .location-help{grid-column:1/-1;font-size:.82rem;color:var(--ink-2)}
+.location-panel input{min-width:0;padding:12px 14px;border:1px solid var(--line-2);border-radius:11px;background:var(--surface-2)}
+.location-panel #test-map{grid-column:1/-1;height:360px;min-height:280px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.location-panel .location-status{grid-column:1/-1;min-height:20px;font-size:.78rem;color:var(--ink-3)}
 .testpanel{border:1px dashed var(--line-2); border-radius:14px; padding:12px 14px; margin-bottom:12px; background:var(--surface-2)}
 .testpanel .row{display:flex; align-items:center; gap:9px; flex-wrap:wrap}
 .testpanel select{padding:7px 10px; border-radius:9px; border:1px solid var(--line); background:var(--surface)}
@@ -500,7 +538,14 @@ const state = {
   hidden: {},
   conv: 'live',
   liveConversations: [],
+  testConversations: [],
+  testSession: null,
   testChannel: 'whatsapp',
+  testName: '',
+  locationStep: false,
+  notifications: [],
+  notificationsOpen: false,
+  integrations: {},
   log: [],
 };
 
@@ -618,6 +663,62 @@ async function updateOrderStatus(reference, status) {
   }
 }
 
+function productFormValues() {
+  const value = id => document.querySelector(`#f_product_${id}`)?.value?.trim() || '';
+  return { ref: value('ref'), position: Number(value('position')), name: value('name'),
+    price: Number(value('price')), quantity: Number(value('quantity')), category: value('category') };
+}
+async function saveProduct() {
+  if (!LIVE) return toast('Le catalogue est modifiable après connexion à l’API.');
+  const payload = productFormValues();
+  const original = $('#product_original_ref')?.value;
+  try {
+    await api(`/products${original ? `/${encodeURIComponent(original)}` : ''}`, {
+      method: original ? 'PUT' : 'POST', body: JSON.stringify(payload),
+    });
+    await refreshLiveQuiet(); render(); toast('Produit enregistré');
+  } catch (e) { toast('Impossible d’enregistrer ce produit'); }
+}
+async function adjustStock(ref, delta) {
+  const product = PRODUCTS.find(p => p.ref === ref);
+  if (!LIVE || !product) return;
+  try { await api(`/products/${encodeURIComponent(ref)}/stock`, { method:'PATCH', body:JSON.stringify({quantity:Math.max(0, product.qty + delta)}) });
+    await refreshLiveQuiet(); render();
+  } catch (e) { toast('Impossible de modifier le stock'); }
+}
+async function deleteProduct(ref) {
+  if (!LIVE || !confirm(`Supprimer ${ref} ?`)) return;
+  try { await api(`/products/${encodeURIComponent(ref)}`, {method:'DELETE'}); await refreshLiveQuiet(); render(); toast('Produit supprimé'); }
+  catch (e) { toast('Ce produit est peut-être déjà utilisé dans une commande'); }
+}
+async function deleteClient(id, name) {
+  if (!LIVE) return toast('La suppression nécessite le backend connecté.');
+  if (!confirm(`Supprimer ${name} et son historique ?`)) return;
+  try {
+    await api(`/clients/${encodeURIComponent(id)}`, {method:'DELETE'});
+    state.clients = state.clients.filter(c => c.id !== id);
+    state.liveConversations = state.liveConversations.filter(c => c.client_id !== id);
+    state.testConversations = state.testConversations.filter(c => c.client_id !== id);
+    if (state.conv === id) state.conv = null;
+    render();
+    toast('Client supprimé');
+  } catch (e) { toast('Impossible de supprimer ce client'); }
+}
+async function saveChannels() {
+  if (!LIVE) return toast('Connectez le backend pour enregistrer les canaux.');
+  const value = id => document.querySelector(`#f_channel_${id}`)?.value?.trim() || '';
+  try {
+    await api('/tenant/integrations', {method:'PUT', body:JSON.stringify({
+      whatsapp: {phone_number_id: value('wa_phone'), access_token: value('wa_token'), verify_token: value('wa_verify')},
+      meta: {page_access_token: value('meta_token'), verify_token: value('meta_verify')},
+      email: {sales_email: value('email_address'), app_password: value('email_password')},
+    })});
+    state.integrations = await api('/tenant/integrations');
+    toast('Canaux enregistrés de façon sécurisée');
+    render();
+  } catch (e) { toast('Impossible d’enregistrer les canaux'); }
+}
+
 function computeClientStats() {
   const byId = {};
   state.orders.forEach(o => {
@@ -628,8 +729,8 @@ function computeClientStats() {
 }
 
 async function loadFromApi() {
-  const [stats, board, products, clientsRaw, profile] = await Promise.all([
-    api('/stats'), api('/orders/board'), api('/products'), api('/clients'), api('/tenant'),
+  const [stats, board, products, clientsRaw, profile, integrations] = await Promise.all([
+    api('/stats'), api('/orders/board'), api('/products'), api('/clients'), api('/tenant'), api('/tenant/integrations'),
   ]);
 
   PRODUCTS = products.map(p => ({ n: p.position, ref: p.ref, name: p.name, price: Number(p.price),
@@ -645,6 +746,7 @@ async function loadFromApi() {
   }));
 
   state.profile = profile;
+  state.integrations = integrations;
   state.activity = {
     days: stats.days,
     whatsapp: stats.messages_by_channel.whatsapp, instagram: stats.messages_by_channel.instagram,
@@ -652,11 +754,24 @@ async function loadFromApi() {
   };
 
   await refreshConversationList();
+  await refreshTestConversationList();
 }
 
 async function refreshConversationList() {
   try { state.liveConversations = await api('/conversations'); }
   catch (e) { /* silencieux : une conversation en moins n'interrompt pas le tableau de bord */ }
+}
+async function refreshTestConversationList() {
+  try { state.testConversations = await api('/test/conversations'); }
+  catch (e) { state.testConversations = []; }
+}
+async function toggleNotifications() {
+  state.notificationsOpen = !state.notificationsOpen;
+  if (state.notificationsOpen && LIVE) {
+    try { state.notifications = await api('/notifications'); }
+    catch (e) { toast('Notifications indisponibles'); }
+  }
+  renderTopbar();
 }
 
 async function refreshLiveQuiet() {
@@ -678,8 +793,12 @@ async function refreshLiveQuiet() {
       instagram: stats.messages_by_channel.instagram, messenger: stats.messages_by_channel.messenger,
       email: stats.messages_by_channel.email };
     await refreshConversationList();
-    if (state.view === 'dashboard' || state.view === 'orders' || state.view === 'catalogue'
-        || state.view === 'clients' || state.view === 'conversations') render(true);
+    await refreshTestConversationList();
+    const activeInput = document.activeElement;
+    const isTyping = (activeInput?.id === 'sellerinput' || activeInput?.id === 'testinput')
+      && activeInput.value.length > 0;
+    if (!isTyping && (state.view === 'dashboard' || state.view === 'orders' || state.view === 'catalogue'
+        || state.view === 'clients' || state.view === 'conversations')) render(true);
   } catch (e) { /* on retentera au prochain tour ; pas de bandeau d'erreur pour un sondage silencieux */ }
 }
 const LOGO = `<svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="og" x1="0" y1="0" x2="1" y2="1">
@@ -690,6 +809,7 @@ const LOGO = `<svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient 
 const NAV = [
   {id:'dashboard',    label:'Tableau de bord', icon:ICON.dash,  group:'Pilotage'},
   {id:'conversations',label:'Conversations',   icon:ICON.chat,  group:'Pilotage', count:()=>(LIVE?state.liveConversations.length:DEMO_ARCHIVES.length)+1},
+  {id:'test',         label:'Test',             icon:ICON.bolt,  group:'Pilotage', count:()=>state.testConversations.length},
   {id:'orders',       label:'Commandes',       icon:ICON.bag,   group:'Vente', count:()=>state.orders.length},
   {id:'catalogue',    label:'Catalogue',       icon:ICON.box,   group:'Vente', count:()=>PRODUCTS.length},
   {id:'clients',      label:'Clients',         icon:ICON.users, group:'Vente', count:()=>state.clients.length},
@@ -737,6 +857,7 @@ function onOutside(e){
 const TITLES = {
   dashboard:['Vue d\u2019ensemble','Activité de vente sur tous vos canaux'],
   conversations:['Conversations','Vos échanges clients et l\u2019agent de vente'],
+  test:['Test','Simulez les clients sans toucher aux conversations réelles'],
   orders:['Commandes','Suivez chaque commande jusqu\u2019à la remise'],
   catalogue:['Catalogue','8 références · Hackathon LSC 2026'],
   clients:['Clients','Répertoire issu de vos conversations'],
@@ -757,6 +878,13 @@ function renderTopbar(){
     <button class="iconbtn" data-act="theme" aria-label="Changer de thème">${svg(dark?ICON.sun:ICON.moon)}</button>
     <button class="iconbtn" data-act="notif" aria-label="Notifications">${svg(ICON.bell)}<span class="dot"></span></button>
     <button class="btn" data-go="conversations">${svg(ICON.bolt,2)}Voir les conversations</button>`;
+  if (state.notificationsOpen) {
+    const panel = el(`<div class="notifpanel" role="status"><h3>Notifications</h3>
+      ${state.notifications.length ? state.notifications.map(n => `<button class="notifitem" data-go="conversations">
+        <b>${esc(n.title)}</b><span>${esc(n.text)} · ${timeAgo(n.created_at)}</span></button>`).join('')
+        : '<div class="empty">Aucune notification récente.</div>'}</div>`);
+    $('#topbar').appendChild(panel);
+  }
 }
 
 /* ------------------------------ Graphiques ------------------------------ */
@@ -857,6 +985,7 @@ function viewDashboard(){
 
 function orderCard(o){
   const st=STATUS[o.status], c=CH[o.channel];
+  const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(o.place||'')}`;
   return `<article class="order${o.fresh?' fresh':''}" style="--accent:${st.accent}">
     <div style="display:flex;align-items:center;gap:8px">
       <span class="ref num">${o.ref}</span>
@@ -869,7 +998,8 @@ function orderCard(o){
       <span style="display:inline-flex;align-items:center;gap:5px">${svg(o.mode==='retrait'?ICON.store:ICON.truck,1.9)}${o.mode==='retrait'?'Retrait':'Livraison'}</span>
       <span style="display:inline-flex;align-items:center;gap:5px">${svg(ICON.clock,1.9)}${esc(o.slot)}</span>
     </div>
-    <div class="meta" style="margin-top:5px"><span style="display:inline-flex;align-items:center;gap:5px">${svg(ICON.pin,1.9)}${esc(o.place)}</span></div>
+    <div class="meta" style="margin-top:5px"><span style="display:inline-flex;align-items:center;gap:5px">${svg(ICON.pin,1.9)}${esc(o.place)}</span>
+      <a href="${esc(mapUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir ${esc(o.place)} dans Google Maps" title="Ouvrir dans Google Maps">${svg(ICON.link,1.8)}</a></div>
     <div class="foot"><span class="amount">${fcfa(o.amount)}</span>
       ${LIVE ? `<select class="status-select" data-order-status="${esc(o.ref)}" aria-label="Statut de ${esc(o.ref)}">
         ${Object.entries(STATUS).map(([key, value]) => `<option value="${key}" ${key===o.status?'selected':''}>${value.label}</option>`).join('')}
@@ -896,8 +1026,15 @@ function viewOrders(){
 
 function viewCatalogue(){
   return `<section class="card pad">
-    <div class="sechead"><div><h2>Références en vente</h2><p>Les numéros 1 à 8 sont ceux que le client tape dans la conversation</p></div>
-      <button class="btn sm" data-act="soon" style="margin-left:auto">${svg(ICON.plus,2.4)}Ajouter une référence</button></div>
+    <div class="sechead"><div><h2>Références en vente</h2><p>Ajoutez, modifiez, supprimez et ajustez le stock depuis cet espace.</p></div></div>
+    <form class="formgrid" data-product-form style="margin-bottom:18px">
+      <input type="hidden" id="product_original_ref">
+      ${field('product_ref','Référence','P09')}${field('product_position','Numéro client','9','', 'number')}
+      ${field('product_name','Nom du produit','')}${field('product_price','Prix','0','', 'number')}
+      ${field('product_quantity','Stock','0','', 'number')}${field('product_category','Catégorie','Catalogue')}
+      <div class="formactions wide"><button class="btn" data-act="saveproduct" type="button">${svg(ICON.save,2)}Enregistrer le produit</button>
+        <button class="btn ghost" data-act="clearproduct" type="button">Nouveau</button></div>
+    </form>
     <div class="prodgrid">${PRODUCTS.map(p=>`
       <article class="prod">
         <div style="display:flex;align-items:center;gap:9px">
@@ -907,8 +1044,12 @@ function viewCatalogue(){
         <div class="name">${esc(p.name)}</div>
         <div class="price num">${new Intl.NumberFormat('fr-FR').format(p.price)} <span>FCFA</span></div>
         <div style="display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:9px;border-top:1px dashed var(--line-2);font-size:.78rem;color:var(--ink-3)">
-          <span>${p.cat}</span><span class="num" style="margin-left:auto">${p.inStock?p.qty+' unités':'à réapprovisionner'}</span>
+          <span>${esc(p.cat)}</span><span class="num" style="margin-left:auto">${p.qty} unités</span>
         </div>
+        <div class="prod-actions"><button class="btn ghost sm" data-edit-product="${esc(p.ref)}">Modifier</button>
+          <button class="btn ghost sm" data-stock-product="${esc(p.ref)}" data-stock-delta="-1" aria-label="Diminuer le stock">−</button>
+          <button class="btn ghost sm" data-stock-product="${esc(p.ref)}" data-stock-delta="1" aria-label="Augmenter le stock">+</button>
+          <button class="btn ghost sm" data-delete-product="${esc(p.ref)}" aria-label="Supprimer le produit">Supprimer</button></div>
       </article>`).join('')}</div>
   </section>`;
 }
@@ -917,12 +1058,13 @@ function viewClients(){
   return `<section class="card pad">
     <div class="sechead"><div><h2>Répertoire clients</h2><p>Créé automatiquement à partir des conversations</p></div></div>
     <div class="tablewrap"><table>
-      <thead><tr><th>Client</th><th>Canal d\u2019origine</th><th>Téléphone</th><th>Commandes</th><th>Total dépensé</th><th>Dernier échange</th></tr></thead>
+      <thead><tr><th>Client</th><th>Canal d\u2019origine</th><th>Téléphone</th><th>Commandes</th><th>Total dépensé</th><th>Dernier échange</th><th></th></tr></thead>
       <tbody>${state.clients.map(c=>`<tr>
         <td><div style="display:flex;align-items:center;gap:10px"><span class="userbtn av" style="width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:#fff;background:linear-gradient(140deg,${CH[c.channel].color},var(--violet));font-weight:700;font-size:.75rem">${initials(c.name)}</span><b>${esc(c.name)}</b></div></td>
         <td><span class="tag" style="background:color-mix(in srgb, ${CH[c.channel].color} 15%, transparent);color:${CH[c.channel].color}"><span class="dotc" style="background:${CH[c.channel].color}"></span>${CH[c.channel].label}</span></td>
         <td class="num">${c.phone}</td><td class="num">${c.orders}</td><td class="num">${fcfa(c.spent)}</td>
-        <td style="color:var(--ink-3)">${c.last}</td></tr>`).join('')}</tbody>
+        <td style="color:var(--ink-3)">${c.last}</td>
+        <td><button class="btn ghost sm" data-delete-client="${c.id}" aria-label="Supprimer ${esc(c.name)}">Supprimer</button></td></tr>`).join('')}</tbody>
     </table></div>
   </section>`;
 }
@@ -947,7 +1089,6 @@ const TEST_EXTERNAL_ID = 'demo-tableau-de-bord';
 /* ---------------------- Mode connecté : vrai backend ---------------------- */
 async function openLiveConversation(clientId) {
   state.conv = clientId;
-  render();
   try {
     const messages = await api(`/conversations/${clientId}/messages`);
     const stream = $('#stream');
@@ -962,6 +1103,13 @@ async function openLiveConversation(clientId) {
 
 async function sendTestMessage(text) {
   if (!text.trim()) return;
+  state.testName = $('#test-name')?.value.trim() || state.testName;
+  if (!state.testName) {
+    toast('Indiquez le nom du client avant de discuter.');
+    $('#test-name')?.focus();
+    return;
+  }
+  if (!state.testSession) state.testSession = `test:${Date.now()}`;
   bubbleTest('me', text);
   const composer = $('#testinput'); if (composer) composer.value = '';
   const typing = el('<div class="typing"><i></i><i></i><i></i></div>');
@@ -969,30 +1117,127 @@ async function sendTestMessage(text) {
   $('#teststream').scrollTop = $('#teststream').scrollHeight;
   try {
     const reply = await api('/chat', { method: 'POST', body: JSON.stringify({
-      channel: state.testChannel, external_id: TEST_EXTERNAL_ID, name: 'Testeur (tableau de bord)', text }) });
+      channel: state.testChannel, external_id: state.testSession,
+      name: state.testName, text }) });
     typing.remove();
     bubbleTest('bot', reply.reply);
+    if (reply.step === 'position') showTestLocationControls();
+    else if (state.locationStep) {
+      $('#testlocation').innerHTML = '';
+      state.locationStep = false;
+    }
     if (reply.order_reference) {
       toast(`Commande ${reply.order_reference} créée — visible dans « Commandes »`);
       await refreshLiveQuiet();
     }
+    await refreshTestConversationList();
+    return reply;
   } catch (e) {
     typing.remove();
     bubbleTest('bot', 'Connexion au backend perdue. Vérifiez que le serveur local est bien démarré.');
+    return null;
   }
+}
+function showTestLocationControls() {
+  const target = $('#testlocation');
+  if (!target) return;
+  state.locationStep = true;
+  target.innerHTML = `<div class="location-panel">
+    <div class="location-title">${svg(ICON.pin,2)} Localisation de livraison</div>
+    <div class="location-help">Choisissez « Position actuelle » ou cliquez sur la carte, vérifiez l’adresse puis appuyez sur Envoyer.</div>
+    <input id="test-location-manual" placeholder="Latitude, longitude ou adresse" aria-label="Position manuelle">
+    <button class="btn" data-act="sharetestlocation">${svg(ICON.pin,1.8)}Position actuelle</button>
+    <div id="test-map" aria-label="Carte de localisation"></div>
+    <div class="location-status" id="location-status" aria-live="polite">Aucune position sélectionnée.</div>
+    <button class="btn" data-act="sendtestlocation">${svg(ICON.send,1.8)}Envoyer la localisation</button>
+  </div>`;
+  if (window.L) {
+    const map = L.map('test-map').setView([6.13, 1.22], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
+    map.on('click', event => {
+      const value = `${event.latlng.lat.toFixed(6)}, ${event.latlng.lng.toFixed(6)}`;
+      $('#test-location-manual').value = value;
+      $('#location-status').textContent = `Position sélectionnée : ${value}`;
+      L.marker(event.latlng).addTo(map);
+    });
+    setTimeout(() => map.invalidateSize(), 100);
+  }
+}
+async function shareTestLocation() {
+  const status = $('#location-status');
+  if (!navigator.geolocation) {
+    if (status) status.textContent = 'La géolocalisation n’est pas disponible dans ce navigateur.';
+    return toast('La géolocalisation n’est pas disponible dans ce navigateur.');
+  }
+  if (status) status.textContent = 'Recherche de votre position… Autorisez la localisation du navigateur.';
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      const value = `${position.coords.latitude.toFixed(6)}, ${position.coords.longitude.toFixed(6)}`;
+      const input = $('#test-location-manual');
+      if (input) input.value = value;
+      if (status) status.textContent = `Position trouvée : ${value}. Appuyez sur Envoyer la localisation.`;
+    },
+    error => {
+      const reason = error.code === 1 ? 'Autorisation refusée.' : 'Position indisponible.';
+      if (status) status.textContent = `${reason} Cliquez sur la carte ou saisissez une adresse.`;
+      toast(`${reason} Vérifiez les permissions du navigateur.`);
+    },
+    {enableHighAccuracy: true, timeout: 10000, maximumAge: 30000});
+}
+async function sendManualTestLocation() {
+  const value = $('#test-location-manual')?.value?.trim();
+  if (!value) {
+    $('#location-status').textContent = 'Saisissez une adresse ou sélectionnez une position sur la carte.';
+    return;
+  }
+  const reply = await sendTestMessage(value);
+  if (reply && $('#testlocation')) $('#testlocation').innerHTML = '';
+}
+function openTestMap() {
+  const value = $('#test-location-manual')?.value?.trim() || 'Lome, Togo';
+  window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(value)}`, '_blank', 'noopener');
 }
 async function sendSellerReply(text) {
   if (!text.trim() || typeof state.conv !== 'number') return;
-  const input = $('#sellerinput'); if (input) input.value = '';
   try {
-    await api(`/conversations/${state.conv}/reply`, {
+    const result = await api(`/conversations/${state.conv}/reply`, {
       method: 'POST', body: JSON.stringify({ text }),
     });
     await openLiveConversation(state.conv);
-    toast('Réponse vendeur envoyée au client');
+    const input = $('#sellerinput'); if (input) input.value = '';
+    toast(result.delivered === false
+      ? 'Réponse enregistrée, mais canal externe non configuré'
+      : 'Réponse vendeur envoyée au client');
   } catch (e) {
     toast('Impossible d’envoyer la réponse vendeur');
   }
+}
+async function toggleConversationAi(clientId, enabled) {
+  if (!LIVE) return toast('Le contrôle IA nécessite le backend connecté.');
+  try {
+    const result = await api(`/conversations/${clientId}/ai`, {
+      method: 'PATCH', body: JSON.stringify({enabled}),
+    });
+    const conversation = state.liveConversations.find(item => item.client_id === clientId);
+    if (conversation) conversation.ai_enabled = result.ai_enabled;
+    render();
+    toast(result.ai_enabled ? 'IA réactivée' : 'IA désactivée : vous répondez librement');
+  } catch (e) { toast('Impossible de modifier le mode IA'); }
+}
+async function deleteConversation(clientId) {
+  if (!LIVE) return toast('La suppression nécessite le backend connecté.');
+  const conversation = [...state.liveConversations, ...state.testConversations]
+    .find(item => item.client_id === clientId);
+  if (!conversation || !confirm(`Supprimer la conversation de ${conversation.name} et son historique ?`)) return;
+  try {
+    await api(`/conversations/${clientId}`, {method:'DELETE'});
+    state.liveConversations = state.liveConversations.filter(item => item.client_id !== clientId);
+    state.testConversations = state.testConversations.filter(item => item.client_id !== clientId);
+    if (state.conv === clientId) state.conv = null;
+    if (state.testSession === conversation.external_id) state.testSession = null;
+    render();
+    toast('Conversation supprimée');
+  } catch (e) { toast('Impossible de supprimer cette conversation'); }
 }
 function bubbleTest(kind, text) {
   const s = $('#teststream'); if (!s) return;
@@ -1005,18 +1250,43 @@ function viewConversationsLive() {
   const active = state.conv;
   return `<div class="convwrap">
     <section class="card convlist">
-      <button class="convitem" data-testconv="1" aria-current="${active==='test'}">
-        <span class="av" style="background:linear-gradient(140deg,var(--indigo),var(--violet))">${svg(ICON.bolt,2)}</span>
-        <span style="flex:1;min-width:0"><span class="l1"><b>Tester l\u2019agent</b><span class="badge-test">temps réel</span></span>
-        <p>Envoie un vrai message au backend, sans téléphone</p></span>
-      </button>
-      ${list.length ? list.map(c => `<button class="convitem" data-liveconv="${c.client_id}" aria-current="${active===c.client_id}">
+      ${list.length ? list.map(c => `<div class="convitem-wrap"><button class="convitem" data-liveconv="${c.client_id}" aria-current="${active===c.client_id}">
         <span class="av" style="background:linear-gradient(140deg,${CH[c.channel].color},var(--violet))">${initials(c.name)}</span>
         <span style="flex:1;min-width:0"><span class="l1"><b>${esc(c.name)}</b>${c.step==='humain'?'<span class="badge-human">À traiter</span>':'<span class="badge-real">'+CH[c.channel].label+'</span>'}<span class="t">${timeAgo(c.last_seen_at)}</span></span>
-        <p>${esc(c.preview||'')}</p></span></button>`).join('')
+        <p>${esc(c.preview||'')}</p></span></button><button class="iconbtn danger" data-delete-conversation="${c.client_id}" aria-label="Supprimer la conversation de ${esc(c.name)}">×</button></div>`).join('')
         : `<div class="empty" style="margin:10px">Aucun message reçu pour l\u2019instant. Écrivez au numéro WhatsApp connecté, ou utilisez le testeur ci-dessus.</div>`}
     </section>
-    ${active==='test' ? viewTestPanel() : viewLiveThread(list.find(c=>c.client_id===active))}
+    ${viewLiveThread(list.find(c=>c.client_id===active))}
+  </div>`;
+}
+
+async function openTestSession(session) {
+  state.testSession = session.external_id;
+  state.testChannel = session.channel;
+  state.view = 'test';
+  render();
+  try {
+    const messages = await api(`/conversations/${session.client_id}/messages`);
+    const stream = $('#teststream');
+    if (stream) stream.innerHTML = messages.map(m => `<div class="bub ${m.direction === 'in' ? 'me' : 'bot'}">${esc(m.body)}</div>`).join('');
+    if (stream) stream.scrollTop = stream.scrollHeight;
+  } catch (e) { toast('Impossible de charger cette session de test.'); }
+}
+
+function viewTest() {
+  const sessions = state.testConversations;
+  const current = sessions.find(s => s.external_id === state.testSession);
+  const chans = Object.entries(CH);
+  return `<div class="convwrap">
+    <section class="card convlist">
+      <button class="btn" data-act="newtest" style="width:calc(100% - 16px);margin:8px">${svg(ICON.plus,2)}Nouvelle discussion test</button>
+      ${sessions.length ? sessions.map(s => `<div class="convitem-wrap"><button class="convitem" data-testsession="${s.client_id}" aria-current="${current?.client_id===s.client_id}">
+        <span class="av" style="background:${CH[s.channel].color}">${svgFill(CH[s.channel].icon)}</span>
+        <span style="flex:1;min-width:0"><span class="l1"><b>${esc(s.name)}</b><span class="badge-test">test</span></span>
+        <p>${esc(s.preview || 'Nouvelle session')} · ${timeAgo(s.last_seen_at)}</p></span></button><button class="iconbtn danger" data-delete-conversation="${s.client_id}" aria-label="Supprimer la conversation test de ${esc(s.name)}">×</button></div>`).join('')
+        : '<div class="empty" style="margin:10px">Aucune session test. Créez une discussion pour commencer.</div>'}
+    </section>
+    ${viewTestPanel()}
   </div>`;
 }
 
@@ -1030,11 +1300,15 @@ function viewTestPanel() {
     </div>
     <div class="testpanel" style="margin:12px 14px 0">
       <div class="row">
+        <label for="test-name" style="font-size:.8rem;color:var(--ink-3)">Nom du client :</label>
+        <input id="test-name" value="${esc(state.testName)}" placeholder="Ex. Afiwa Segbedji" aria-label="Nom du client test"
+          style="flex:1;min-width:180px;padding:7px 10px;border-radius:9px;border:1px solid var(--line);background:var(--surface)">
         <span style="font-size:.8rem;color:var(--ink-3)">Simuler un client sur :</span>
         <div class="chanpick">${chans.map(([k,c])=>`<button data-testchan="${k}" aria-pressed="${state.testChannel===k}" title="${c.label}" style="color:${state.testChannel===k?c.color:''}">${svgFill(c.icon)}</button>`).join('')}</div>
       </div>
     </div>
     <div class="stream" id="teststream"><div class="bub sys">Ce message ira réellement à votre backend local, comme s\u2019il venait de ${chans.find(([k])=>k===state.testChannel)[1].label}.</div></div>
+    <div id="testlocation"></div>
     <div class="composer">
       <div class="quick" id="testquick">${['1','2','3','5'].map(t=>`<button data-testquick="${t}">${t}</button>`).join('')}</div>
       <div class="inputrow">
@@ -1052,7 +1326,10 @@ function viewLiveThread(conv) {
     <div class="chathead">
       <span class="av" style="background:linear-gradient(140deg,${c.color},var(--violet))">${initials(conv.name)}</span>
       <div><b>${esc(conv.name)}</b><span>${c.label} · conversation réelle</span></div>
-      <span class="modelchip"><span class="pulse"></span>${conv.step==='humain'?'Réponse vendeur requise':'Étape : '+esc(conv.step||'—')}</span>
+      <div class="thread-actions">
+        <button class="btn ghost sm" data-toggle-ai="${conv.client_id}">${conv.ai_enabled===false?'Activer IA':'Désactiver IA'}</button>
+        <span class="modelchip"><span class="pulse"></span>${conv.ai_enabled===false?'Mode manuel':(conv.step==='humain'?'Réponse vendeur requise':'Étape : '+esc(conv.step||'—'))}</span>
+      </div>
     </div>
     <div class="stream" id="stream"><div class="empty">Chargement…</div></div>
     ${conv.step==='humain'?'<div class="banner" style="margin:12px 14px 0"><span>Cette question attend une réponse de votre équipe.</span></div>':''}
@@ -1266,7 +1543,6 @@ function viewConversationsDemo(){
 
 function viewConversations(){
   if (!LIVE) return viewConversationsDemo();
-  if (state.conv === 'live') state.conv = 'test';
   return viewConversationsLive();
 }
 /* ------------------------- Profil de l'entreprise ------------------------- */
@@ -1326,68 +1602,58 @@ function copyRow(label, value){
 }
 function viewSettings(){
   return `<div class="banner" style="background:var(--info-bg);color:var(--info-ink)">
-    ${svg(ICON.help,2)}<span><b>Les identifiants (jetons WhatsApp, mots de passe SMTP…) se configurent dans le fichier
-    backend/.env, jamais ici.</b> Un champ de ce tableau de bord est visible par quiconque
-    ouvre la page : y coller un vrai jeton reviendrait à le publier. Cet écran vous donne les URL exactes à coller
-    côté Meta et Google, et l\u2019état réel de chaque canal.</span></div>
+    ${svg(ICON.help,2)}<span><b>Les identifiants sont protégés côté serveur et ne sont jamais réaffichés.</b>
+    Laissez un champ vide pour conserver sa valeur actuelle.</span></div>
 
   <div class="intgrid">
     <section class="card pad">
       <div class="channelhead">
         <span class="ico" style="background:var(--wa)">${svgFill(ICON.wa)}</span>
         <div><b>WhatsApp Business</b><span>Canal principal · API Cloud Meta</span></div>
-        <span class="tag ${LIVE&&health?.whatsapp?.configured?'ok':(LIVE?'warn':'warn')}">${!LIVE?'Backend non connecté':(health?.whatsapp?.configured?'Jeton configuré':'Jeton manquant dans .env')}</span>
+        <span class="tag ${LIVE&&state.integrations.whatsapp?.access_token?'ok':'warn'}">${!LIVE?'Backend non connecté':(state.integrations.whatsapp?.access_token?'Jeton configuré':'Configuration incomplète')}</span>
       </div>
       <div class="formgrid">
+        ${field('channel_wa_phone','Phone Number ID',state.integrations.whatsapp?.phone_number_id||'')}
+        ${field('channel_wa_token','Access Token', '', 'Jeton Meta WhatsApp', 'password')}
         ${copyRow('URL de rappel (Callback URL) à coller dans Meta', webhookUrl('whatsapp'))}
-        ${copyRow('Jeton de vérification (Verify Token)', 'omnivente_kino_2026')}
+        ${field('channel_wa_verify','Jeton de vérification',state.integrations.whatsapp?.verify_token||'omnivente_kino_2026','','text')}
       </div>
-      <div class="hint" style="margin-top:10px">Le Phone Number ID et le jeton d\u2019accès se saisissent dans
-        <code>WHATSAPP_PHONE_NUMBER_ID</code> et <code>WHATSAPP_ACCESS_TOKEN</code> dans <code>backend/.env</code>.</div>
+      <div class="hint" style="margin-top:10px">Le Phone Number ID, le jeton d\u2019accès et le jeton de vérification se configurent ici, puis restent masqués.</div>
     </section>
 
     <section class="card pad">
       <div class="channelhead">
         <span class="ico" style="background:linear-gradient(140deg,#F09433,var(--ig),#6228D7)">${svg(ICON.ig,2)}</span>
         <div><b>Instagram et Messenger</b><span>Messages directs via l\u2019API Graph de Meta</span></div>
-        <span class="tag ${LIVE&&health?.meta?.configured?'ok':'warn'}">${!LIVE?'Backend non connecté':(health?.meta?.configured?'Jeton configuré':'Jeton manquant dans .env')}</span>
+        <span class="tag ${LIVE&&state.integrations.meta?.page_access_token?'ok':'warn'}">${!LIVE?'Backend non connecté':(state.integrations.meta?.page_access_token?'Jeton configuré':'Configuration incomplète')}</span>
       </div>
       <div class="formgrid">
+        ${field('channel_meta_token','Page Access Token', '', 'Jeton de la Page Facebook', 'password')}
         ${copyRow('URL de rappel (Callback URL) à coller dans Meta', webhookUrl('meta'))}
-        ${copyRow('Jeton de vérification (Verify Token)', 'omnivente_kino_2026')}
+        ${field('channel_meta_verify','Jeton de vérification',state.integrations.meta?.verify_token||'omnivente_kino_2026','','text')}
       </div>
-      <div class="hint" style="margin-top:10px">Autorisations à demander : pages_messaging, instagram_manage_messages.
-        Jeton de page dans <code>META_PAGE_ACCESS_TOKEN</code> dans <code>backend/.env</code>.</div>
+      <div class="hint" style="margin-top:10px">Autorisations à demander : pages_messaging, instagram_manage_messages. Les messages Instagram et Messenger utilisent le jeton de Page enregistré ici.</div>
     </section>
 
     <section class="card pad">
       <div class="channelhead">
         <span class="ico" style="background:var(--em)">${svg(ICON.mail,2)}</span>
         <div><b>E-mail de vente</b><span>Relevé automatique par sondage IMAP (pas de webhook Gmail gratuit)</span></div>
-        <span class="tag ${LIVE&&health?.mail_poller?.configured?'ok':'warn'}">${!LIVE?'Backend non connecté':(health?.mail_poller?.configured?'Boîte configurée':'Identifiants manquants dans .env')}</span>
+        <span class="tag ${LIVE&&state.integrations.email?.sales_email?'ok':'warn'}">${!LIVE?'Backend non connecté':(state.integrations.email?.sales_email?'Boîte configurée':'Configuration incomplète')}</span>
+      </div>
+      <div class="formgrid">
+        ${field('channel_email_address','Adresse e-mail',state.integrations.email?.sales_email||'','Adresse utilisée pour répondre','email')}
+        ${field('channel_email_password','Mot de passe d’application','', 'Mot de passe Gmail/SMTP', 'password')}
       </div>
       <div class="hint">Tinos TechLogistics relève sa boîte toutes les 20 à 30 secondes — un délai normal, propre
         au sondage IMAP plutôt qu\u2019à un webhook. Renseignez <code>SALES_EMAIL</code>, <code>SALES_EMAIL_APP_PASSWORD</code>,
-        <code>SMTP_HOST</code>/<code>IMAP_HOST</code> dans <code>backend/.env</code> (mot de passe d\u2019application Gmail, jamais le mot de passe du compte).</div>
+        <code>SMTP_HOST</code>/<code>IMAP_HOST</code> dans la configuration du canal (mot de passe d\u2019application, jamais le mot de passe du compte).</div>
     </section>
-
-    <section class="card pad">
-      <div class="channelhead">
-        <span class="ico" style="background:linear-gradient(140deg,var(--indigo),var(--violet))">${svg(ICON.bolt,2)}</span>
-        <div><b>Agent de vente</b><span>Modèle de langage et comportement</span></div>
-        <span class="tag ${LIVE&&health?.agent?.configured?'ok':'warn'}">${!LIVE?'Backend non connecté':(health?.agent?.configured?'Clé Groq active':'Clé Groq absente — réponses en mode numérique seul')}</span>
-      </div>
-      <div class="formgrid">
-        <div class="field"><label>Fournisseur</label><input readonly value="Groq"></div>
-        <div class="field"><label>Modèle</label><input readonly value="${LIVE&&health?.agent?.model?esc(health.agent.model):'llama-3.3-70b-versatile'}"></div>
-      </div>
-      <div class="hint" style="margin-top:10px">Clé dans <code>GROQ_API_KEY</code> dans <code>backend/.env</code>
-        (console.groq.com/keys). Sans clé, la machine d\u2019état continue de gérer seule les réponses numériques.</div>
-    </section>
+    <div class="formactions"><button class="btn" data-act="savechannels">${svg(ICON.save,2)}Enregistrer les canaux</button></div>
   </div>`;
 }
 /* ------------------------------ Routage ------------------------------ */
-const VIEWS = {dashboard:viewDashboard, conversations:viewConversations, orders:viewOrders,
+const VIEWS = {dashboard:viewDashboard, conversations:viewConversations, test:viewTest, orders:viewOrders,
   catalogue:viewCatalogue, clients:viewClients, profile:viewProfile, settings:viewSettings};
 
 function render(quiet){
@@ -1410,6 +1676,7 @@ function render(quiet){
       $('#testinput')?.focus({preventScroll:true});
     }
   }
+  if(state.view==='test') $('#testinput')?.focus({preventScroll:true});
   state.orders.forEach(o=>delete o.fresh);
 }
 function go(v){
@@ -1441,11 +1708,44 @@ document.addEventListener('click', async (e)=>{
 
   // Conversations — mode connecté
   const testconv = e.target.closest('[data-testconv]');
-  if(testconv){ state.conv='test'; state.view='conversations'; render(); return; }
+  if(testconv){ state.view='test'; render(); return; }
+  const testSession = e.target.closest('[data-testsession]');
+  if(testSession){
+    const session = state.testConversations.find(s => s.client_id === Number(testSession.dataset.testsession));
+    if(session) await openTestSession(session);
+    return;
+  }
   const liveconv = e.target.closest('[data-liveconv]');
   if(liveconv){ state.conv=Number(liveconv.dataset.liveconv); state.view='conversations'; render(); return; }
   const testchan = e.target.closest('[data-testchan]');
   if(testchan){ state.testChannel=testchan.dataset.testchan; render(); return; }
+  const editProduct = e.target.closest('[data-edit-product]');
+  if(editProduct){
+    const p = PRODUCTS.find(item => item.ref === editProduct.dataset.editProduct);
+    if(p){ $('#product_original_ref').value=p.ref; ['ref','position','name','price','quantity','category'].forEach(k=>{ const input=$(`#f_product_${k}`); if(input) input.value=k==='position'?p.n:k==='price'?p.price:k==='quantity'?p.qty:k==='category'?p.cat:p[k]; }); window.scrollTo({top:0,behavior:'smooth'}); }
+    return;
+  }
+  const stockProduct = e.target.closest('[data-stock-product]');
+  if(stockProduct){ await adjustStock(stockProduct.dataset.stockProduct, Number(stockProduct.dataset.stockDelta)); return; }
+  const deleteProductButton = e.target.closest('[data-delete-product]');
+  if(deleteProductButton){ await deleteProduct(deleteProductButton.dataset.deleteProduct); return; }
+  const deleteClientButton = e.target.closest('[data-delete-client]');
+  if(deleteClientButton){
+    const client = state.clients.find(item => item.id === Number(deleteClientButton.dataset.deleteClient));
+    if(client) await deleteClient(client.id, client.name);
+    return;
+  }
+  const deleteConversationButton = e.target.closest('[data-delete-conversation]');
+  if(deleteConversationButton){
+    await deleteConversation(Number(deleteConversationButton.dataset.deleteConversation));
+    return;
+  }
+  const toggleAiButton = e.target.closest('[data-toggle-ai]');
+  if(toggleAiButton){
+    const conversation = state.liveConversations.find(item => item.client_id === Number(toggleAiButton.dataset.toggleAi));
+    if(conversation) await toggleConversationAi(conversation.client_id, conversation.ai_enabled === false);
+    return;
+  }
   const testquick = e.target.closest('[data-testquick]');
   if(testquick){ await sendTestMessage(testquick.dataset.testquick); return; }
 
@@ -1467,6 +1767,12 @@ document.addEventListener('click', async (e)=>{
   switch(act){
     case 'send': await handleInput($('#chatinput').value); break;
     case 'sendtest': await sendTestMessage($('#testinput').value); break;
+    case 'sharetestlocation': await shareTestLocation(); break;
+    case 'sendtestlocation': await sendManualTestLocation(); break;
+    case 'newtest': state.testSession = null; state.testChannel = 'whatsapp'; state.view = 'test'; render(); break;
+    case 'saveproduct': await saveProduct(); break;
+    case 'clearproduct': render(); break;
+    case 'savechannels': await saveChannels(); break;
     case 'sendreply': await sendSellerReply($('#sellerinput').value); break;
     case 'refreshconv': if(typeof state.conv==='number') await openLiveConversation(state.conv); break;
     case 'theme': toggleTheme(); break;
@@ -1488,7 +1794,7 @@ document.addEventListener('click', async (e)=>{
       renderSidebar(); break;
     }
     case 'cancel': render(); toast('Modifications annulées'); break;
-    case 'notif': toast(LIVE?'Vérifiez l\u2019onglet Commandes pour les dernières arrivées':'3 nouvelles commandes depuis ce matin'); break;
+    case 'notif': await toggleNotifications(); break;
     case 'help': toast('Documentation : voir LOCAL_SETUP.md dans le projet'); break;
     case 'logout': toast('Déconnexion…'); break;
     case 'soon': toast('Création de référence disponible dans le catalogue complet'); break;

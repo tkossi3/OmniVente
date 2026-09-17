@@ -21,6 +21,15 @@ class ProductOut(BaseModel):
     category: str | None = None
 
 
+class ProductIn(BaseModel):
+    ref: str = Field(min_length=1, max_length=20)
+    position: int = Field(ge=1)
+    name: str = Field(min_length=1, max_length=160)
+    price: float = Field(ge=0)
+    quantity: int = Field(ge=0)
+    category: str | None = None
+
+
 class ClientOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 

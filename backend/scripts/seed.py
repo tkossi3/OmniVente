@@ -19,7 +19,7 @@ from app.models import Client, Message, Order, Product, Tenant  # noqa: E402
 from app.services.state_machine import new_session  # noqa: E402
 
 CSV_PATH = Path(__file__).resolve().parents[1] / "data" / "products.csv"
-CLIENTS_CSV_PATH = Path(__file__).resolve().parents[4] / "Docs" / "04_Demandes_Clients_clients.csv"
+CLIENTS_CSV_PATH = Path(__file__).resolve().parents[2] / "Docs" / "04_Demandes_Clients_clients.csv"
 
 TENANT = dict(
     slug="kino-steak", company="Tinos TechLogistics", sector="Distribution & logistique",

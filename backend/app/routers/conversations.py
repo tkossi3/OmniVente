@@ -14,7 +14,7 @@ from app.database import get_db
 from app.deps import get_tenant
 from app.models import Client, Message, Order, Product, Tenant
 from app.schemas import ChatIn, ChatOut, MessageOut
-from app.services import groq_client, state_machine
+from app.services import channels, groq_client, state_machine
 
 router = APIRouter(prefix="/api", tags=["Conversations"])
 
@@ -45,6 +45,8 @@ def _get_or_create_client(db: Session, tenant: Tenant, channel: str, external_id
                         email=external_id if channel == "email" else None)
         db.add(client)
         db.flush()
+    elif name and name != "Client":
+        client.name = name
     client.last_seen_at = datetime.now()
     return client
 
@@ -86,6 +88,10 @@ def process_incoming(db: Session, tenant: Tenant, payload: ChatIn) -> ChatOut:
     db.add(Message(tenant_id=tenant.id, client_id=client.id, channel=payload.channel,
                    direction="in", body=payload.text,
                    step=client.session_state.get("step") if client.session_state else None))
+
+    if client.session_state and client.session_state.get("ai_enabled") is False:
+        db.commit()
+        return ChatOut(reply="", step="manuel")
 
     # Première prise de contact : salutation et catalogue numéroté.
     if not client.session_state:
@@ -174,10 +180,51 @@ def list_conversations(db: Session = Depends(get_db), tenant: Tenant = Depends(g
         last = db.scalar(select(Message).where(Message.client_id == client.id)
                          .order_by(Message.created_at.desc()).limit(1))
         result.append({"client_id": client.id, "name": client.name, "channel": client.channel,
+                   "external_id": client.external_id,
                        "step": (client.session_state or {}).get("step"),
+                       "ai_enabled": (client.session_state or {}).get("ai_enabled", True),
                        "preview": last.body.splitlines()[0] if last else "",
                        "last_seen_at": client.last_seen_at})
     return result
+
+
+@router.get("/test/conversations")
+def list_test_conversations(db: Session = Depends(get_db), tenant: Tenant = Depends(get_tenant)):
+    clients = db.scalars(select(Client).where(
+        Client.tenant_id == tenant.id, Client.external_id.like("test:%")
+    ).order_by(Client.last_seen_at.desc()))
+    result = []
+    for client in clients:
+        last = db.scalar(select(Message).where(Message.client_id == client.id)
+                         .order_by(Message.created_at.desc()).limit(1))
+        result.append({"client_id": client.id, "name": client.name,
+                       "channel": client.channel, "external_id": client.external_id,
+                       "step": (client.session_state or {}).get("step"),
+                       "ai_enabled": (client.session_state or {}).get("ai_enabled", True),
+                       "preview": last.body.splitlines()[0] if last else "",
+                       "last_seen_at": client.last_seen_at})
+    return result
+
+
+@router.get("/notifications")
+def list_notifications(db: Session = Depends(get_db), tenant: Tenant = Depends(get_tenant)):
+    """Retourne les événements récents utiles au tableau de bord."""
+    orders = db.scalars(select(Order).where(
+        Order.tenant_id == tenant.id
+    ).order_by(Order.created_at.desc()).limit(8)).all()
+    messages = db.scalars(select(Message).where(
+        Message.tenant_id == tenant.id, Message.direction == "in"
+    ).order_by(Message.created_at.desc()).limit(8)).all()
+    items = [
+        {"id": f"order-{order.id}", "type": "order", "title": "Nouvelle commande",
+         "text": f"{order.reference} · {order.amount} FCFA", "created_at": order.created_at}
+        for order in orders
+    ] + [
+        {"id": f"message-{message.id}", "type": "message", "title": "Nouveau message",
+         "text": message.body.splitlines()[0][:100], "created_at": message.created_at}
+        for message in messages
+    ]
+    return sorted(items, key=lambda item: item["created_at"], reverse=True)[:10]
 
 
 @router.get("/conversations/{client_id}/messages", response_model=list[MessageOut])
@@ -187,6 +234,35 @@ def conversation_messages(client_id: int, db: Session = Depends(get_db),
         select(Message).where(Message.tenant_id == tenant.id, Message.client_id == client_id)
         .order_by(Message.created_at)
     ))
+
+
+@router.patch("/conversations/{client_id}/ai")
+def set_ai_enabled(client_id: int, payload: dict, db: Session = Depends(get_db),
+                   tenant: Tenant = Depends(get_tenant)):
+    client = db.scalar(select(Client).where(
+        Client.id == client_id, Client.tenant_id == tenant.id))
+    if client is None:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=404, detail="Conversation introuvable")
+    session = dict(client.session_state or {})
+    session["ai_enabled"] = bool(payload.get("enabled", True))
+    client.session_state = session
+    db.commit()
+    return {"client_id": client.id, "ai_enabled": session["ai_enabled"]}
+
+
+@router.delete("/conversations/{client_id}", status_code=204)
+def delete_conversation(client_id: int, db: Session = Depends(get_db),
+                        tenant: Tenant = Depends(get_tenant)):
+    client = db.scalar(select(Client).where(
+        Client.id == client_id, Client.tenant_id == tenant.id))
+    if client is None:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=404, detail="Conversation introuvable")
+    db.query(Message).filter(Message.client_id == client.id).delete(synchronize_session=False)
+    db.query(Order).filter(Order.client_id == client.id).delete(synchronize_session=False)
+    db.delete(client)
+    db.commit()
 
 
 @router.post("/conversations/{client_id}/reset")
@@ -221,4 +297,8 @@ def seller_reply(client_id: int, payload: dict, db: Session = Depends(get_db),
     db.add(Message(tenant_id=tenant.id, client_id=client.id, channel=client.channel,
                    direction="out", body=text, step="vendeur"))
     db.commit()
-    return {"status": "sent", "step": previous_step}
+    destination = client.phone or client.email or client.external_id
+    sent = channels.dispatch(client.channel, destination, text,
+                             (tenant.integrations or {}).get(client.channel)
+                             or (tenant.integrations or {}).get("meta"))
+    return {"status": "sent", "step": previous_step, "delivered": sent}

@@ -140,7 +140,7 @@ Avec la configuration locale Fedora déjà préparée dans `.env`, la commande r
 depuis n'importe quel dossier est :
 
 ```bash
-/chemin/vers/backend/.venv/bin/uvicorn app.main:app \
+/chemin/vers/backend/.venv/bin/python -m uvicorn app.main:app \
    --app-dir /chemin/vers/backend \
    --env-file /chemin/vers/backend/.env \
    --host 127.0.0.1 --port 8000
