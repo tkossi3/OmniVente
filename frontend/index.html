@@ -232,14 +232,14 @@ main{padding:24px 26px 56px; max-width:1560px; width:100%}
 .empty{padding:22px; border:1px dashed var(--line-2); border-radius:14px; color:var(--ink-3); font-size:.86rem; background:var(--surface-2)}
 
 /* ---------- Catalogue ---------- */
-.prodgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr)); gap:14px}
+.prodgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr)); gap:14px; align-items:stretch}
 .prod{padding:16px; border-radius:15px; background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow);
-  display:flex; flex-direction:column; gap:9px; transition:transform .2s, box-shadow .2s}
-.prod-actions{display:grid;grid-template-columns:minmax(0,1fr) auto auto minmax(0,1fr);gap:7px;margin-top:4px}
-.prod-actions .btn:first-child{min-width:0}
+  display:flex; flex-direction:column; gap:9px; min-width:0; transition:transform .2s, box-shadow .2s}
+.prod-actions{display:grid;grid-template-columns:minmax(0,1fr) auto auto minmax(0,1fr);gap:7px;margin-top:auto;padding-top:4px}
+.prod-actions .btn{min-width:0; white-space:nowrap; padding-inline:8px}
 .prod:hover{transform:translateY(-3px); box-shadow:var(--shadow-lift)}
 .prod .sku{font-size:.72rem; color:var(--ink-3); font-variant-numeric:tabular-nums}
-.prod .name{font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:1.06rem; letter-spacing:-.02em}
+.prod .name{font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:1.06rem; letter-spacing:-.02em; min-height:2.45em; overflow-wrap:anywhere}
 .prod .price{font-size:1.15rem; font-weight:700; font-variant-numeric:tabular-nums; color:var(--emerald)}
 .prod .price span{font-size:.78rem; font-weight:600; color:var(--ink-3)}
 .prod .idbadge{width:26px; height:26px; border-radius:8px; display:grid; place-items:center; font-size:.8rem; font-weight:700;
@@ -784,7 +784,8 @@ async function updateOrderStatus(reference, status) {
     await refreshLiveQuiet();
     toast(`Commande ${reference} déplacée : ${STATUS[status].label}`);
   } catch (e) {
-    toast('Impossible de modifier le statut de la commande');
+    const detail = e?.detail || e?.message;
+    toast(detail ? `Statut non modifié : ${detail}` : 'Impossible de modifier le statut de la commande');
     render();
   }
 }
