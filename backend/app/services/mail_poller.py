@@ -55,6 +55,21 @@ def _body_text(message: Message) -> str:
     return payload.decode(charset, errors="ignore").strip() if payload else ""
 
 
+def _is_automated_message(message: Message, sender_addr: str) -> bool:
+    """Ignore les alertes et notifications qui ne sont pas des demandes client."""
+    sender = sender_addr.lower()
+    local_part, _, domain = sender.partition("@")
+    if sender == (settings.sales_email or "").lower():
+        return True
+    if local_part in {"no-reply", "noreply", "do-not-reply", "donotreply"}:
+        return True
+    if domain in {"google.com", "accounts.google.com"}:
+        return True
+    if message.get("Auto-Submitted") or message.get("List-Unsubscribe"):
+        return True
+    return message.get("Precedence", "").lower() in {"bulk", "list", "junk"}
+
+
 def _poll_once(tenant_slug: str) -> int:
     """Une passe de sondage. Renvoie le nombre de messages traités."""
     if not (settings.sales_email and settings.sales_email_app_password):
@@ -85,6 +100,9 @@ def _poll_once(tenant_slug: str) -> int:
                     continue
                 parsed = email.message_from_bytes(raw[0][1])
                 sender_name, sender_addr = parseaddr(_decode(parsed.get("From")))
+                if _is_automated_message(parsed, sender_addr):
+                    logger.info("E-mail automatique ignoré : %s", sender_addr or "expéditeur inconnu")
+                    continue
                 text = _body_text(parsed)
                 if not (sender_addr and text.strip()):
                     continue
