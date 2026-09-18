@@ -86,7 +86,7 @@ button,input,select,textarea{font:inherit; color:inherit}
 @keyframes drift3{50%{transform:translate3d(calc(var(--mx,0)*1px + 4vw), calc(var(--my,0)*1px - 5vw),0) scale(1.08)}}
 
 /* ---------- Structure ---------- */
-.app{position:relative; z-index:1; display:grid; grid-template-columns:262px 1fr; min-height:100vh}
+.app{position:relative; display:grid; grid-template-columns:262px 1fr; min-height:100vh}
 .auth-root{min-height:100vh;position:relative;z-index:5;display:grid;place-items:center;padding:24px}
 .auth-shell{width:min(960px,100%);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);overflow:hidden;border:1px solid var(--line);border-radius:24px;background:var(--surface);box-shadow:var(--shadow-lift)}
 .auth-brand{padding:48px;background:linear-gradient(145deg,var(--indigo),var(--violet));color:#fff;display:flex;flex-direction:column;justify-content:space-between;min-height:520px}
@@ -232,10 +232,10 @@ main{padding:24px 26px 56px; max-width:1560px; width:100%}
 .empty{padding:22px; border:1px dashed var(--line-2); border-radius:14px; color:var(--ink-3); font-size:.86rem; background:var(--surface-2)}
 
 /* ---------- Catalogue ---------- */
-.prodgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px}
+.prodgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr)); gap:14px}
 .prod{padding:16px; border-radius:15px; background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow);
   display:flex; flex-direction:column; gap:9px; transition:transform .2s, box-shadow .2s}
-.prod-actions{display:grid;grid-template-columns:1fr auto auto auto;gap:7px;margin-top:4px}
+.prod-actions{display:grid;grid-template-columns:minmax(0,1fr) auto auto minmax(0,1fr);gap:7px;margin-top:4px}
 .prod-actions .btn:first-child{min-width:0}
 .prod:hover{transform:translateY(-3px); box-shadow:var(--shadow-lift)}
 .prod .sku{font-size:.72rem; color:var(--ink-3); font-variant-numeric:tabular-nums}
@@ -356,7 +356,9 @@ tbody tr{transition:background .16s} tbody tr:hover{background:var(--surface-2)}
   h1{font-size:1.4rem} h2{font-size:1.12rem}
   .topbar{gap:8px}.topbar .crumb{min-width:0;flex:1}.topbar .livebadge,.topbar>.btn{display:none}
   .card.pad{padding:14px}.prodgrid{grid-template-columns:1fr}
-  .prod-actions{grid-template-columns:1fr 1fr}.prod-actions .btn:first-child{grid-column:1/-1}
+  .prod-actions{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px}
+  .prod-actions .btn{min-width:0;padding-inline:8px;white-space:nowrap}
+  .prod-actions .btn:first-child,.prod-actions .btn:last-child{grid-column:auto}
   .chat{height:calc(100vh - 150px);min-height:470px}.chathead{padding:11px}.chathead>div{min-width:0}
   .chathead .modelchip{font-size:0;padding:7px}.chathead .modelchip .pulse{margin:0}
   .chathead .thread-actions{gap:4px}.thread-actions .btn{padding:6px 8px;font-size:.72rem}
@@ -637,7 +639,8 @@ const CH = {
 const STATUS = {
   preparer:{label:'À préparer', accent:'var(--indigo)'},
   livraison:{label:'En cours de livraison', accent:'var(--violet)'},
-  retrait:{label:'Retrait en boutique', accent:'#0EA5A0'},
+  livre:{label:'Livré', accent:'#3B82F6'},
+  retrait:{label:'Prêt à la boutique', accent:'#0EA5A0'},
   termine:{label:'Terminé', accent:'var(--emerald)'},
   probleme:{label:'Annulé / Problème', accent:'#D8453C'}
 };
@@ -664,6 +667,8 @@ const state = {
   testChannel: 'whatsapp',
   testName: '',
   locationStep: false,
+  locationMap: null,
+  locationMarker: null,
   notifications: [],
   notificationsOpen: false,
   integrations: {},
@@ -918,7 +923,10 @@ async function refreshLiveQuiet() {
     const activeInput = document.activeElement;
     const isTyping = (activeInput?.id === 'sellerinput' || activeInput?.id === 'testinput')
       && activeInput.value.length > 0;
-    if (!isTyping && (state.view === 'dashboard' || state.view === 'orders' || state.view === 'catalogue'
+    const productForm = document.querySelector('[data-product-form]');
+    const isEditingProduct = state.view === 'catalogue'
+      && Boolean(productForm?.querySelector('#product_original_ref')?.value);
+    if (!isTyping && !isEditingProduct && (state.view === 'dashboard' || state.view === 'orders' || state.view === 'catalogue'
         || state.view === 'clients' || state.view === 'conversations')) render(true);
   } catch (e) { /* on retentera au prochain tour ; pas de bandeau d'erreur pour un sondage silencieux */ }
 }
@@ -1065,7 +1073,7 @@ function viewDashboard(){
   const a=state.activity, total=Object.keys(CH).reduce((s,k)=>s+a[k].at(-1),0);
   const kpis=[
     {lab:'Ventes encaissées', val:fcfa(money()), delta:'+18,4 % sur 7 jours', up:true, spark:a.whatsapp, color:'var(--emerald)', icon:ICON.bolt},
-    {lab:'Commandes ouvertes', val:countBy('preparer')+countBy('livraison')+countBy('retrait'), sub:'en cours', delta:'+3 aujourd\u2019hui', up:true, spark:[4,5,4,6,7,6,8], color:'var(--indigo)', icon:ICON.bag},
+    {lab:'Commandes ouvertes', val:countBy('preparer')+countBy('livraison')+countBy('livre')+countBy('retrait'), sub:'en cours', delta:'+3 aujourd\u2019hui', up:true, spark:[4,5,4,6,7,6,8], color:'var(--indigo)', icon:ICON.bag},
     {lab:'Messages reçus aujourd\u2019hui', val:total, sub:'sur 4 canaux', delta:'+22 % vs hier', up:true, spark:a.instagram, color:'var(--violet)', icon:ICON.chat},
     {lab:'Commandes conclues par l\u2019agent', val:'87 %', delta:'−1,2 pt cette semaine', up:false, spark:[81,84,83,88,86,89,87], color:'var(--ms)', icon:ICON.check}
   ];
@@ -1107,6 +1115,12 @@ function viewDashboard(){
 function orderCard(o){
   const st=STATUS[o.status], c=CH[o.channel];
   const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(o.place||'')}`;
+  const nextStatuses = o.status === 'termine' ? ['termine']
+    : o.status === 'preparer' ? ['preparer', o.mode === 'retrait' ? 'retrait' : 'livraison']
+    : o.status === 'livraison' ? ['livraison', 'livre']
+    : o.status === 'livre' || o.status === 'retrait' ? [o.status, 'termine']
+    : [o.status];
+  const statusLabel = key => key === 'retrait' ? 'Prêt à la boutique' : STATUS[key].label;
   return `<article class="order${o.fresh?' fresh':''}" style="--accent:${st.accent}">
     <div style="display:flex;align-items:center;gap:8px">
       <span class="ref num">${o.ref}</span>
@@ -1123,7 +1137,7 @@ function orderCard(o){
       <a href="${esc(mapUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir ${esc(o.place)} dans Google Maps" title="Ouvrir dans Google Maps">${svg(ICON.link,1.8)}</a></div>
     <div class="foot"><span class="amount">${fcfa(o.amount)}</span>
       ${LIVE ? `<select class="status-select" data-order-status="${esc(o.ref)}" aria-label="Statut de ${esc(o.ref)}">
-        ${Object.entries(STATUS).map(([key, value]) => `<option value="${key}" ${key===o.status?'selected':''}>${value.label}</option>`).join('')}
+        ${nextStatuses.map(key => `<option value="${key}" ${key===o.status?'selected':''}>${statusLabel(key)}</option>`).join('')}
       </select>` : `<span class="tag">${o.when}</span>`}
     </div>
   </article>`;
@@ -1276,12 +1290,19 @@ function showTestLocationControls() {
   </div></div>`;
   if (window.L) {
     const map = L.map('test-map').setView([6.13, 1.22], 12);
+    state.locationMap = map;
+    state.locationMarker = null;
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
+    const updateLocationMarker = latlng => {
+      if (!state.locationMarker) state.locationMarker = L.marker(latlng).addTo(map);
+      else state.locationMarker.setLatLng(latlng);
+      map.panTo(latlng);
+    };
     map.on('click', event => {
       const value = `${event.latlng.lat.toFixed(6)}, ${event.latlng.lng.toFixed(6)}`;
       $('#test-location-manual').value = value;
       $('#location-status').textContent = `Position sélectionnée : ${value}`;
-      L.marker(event.latlng).addTo(map);
+      updateLocationMarker(event.latlng);
     });
     setTimeout(() => map.invalidateSize(), 100);
   } else {
@@ -1290,10 +1311,12 @@ function showTestLocationControls() {
       mapTarget.innerHTML = '<div class="location-map-fallback">La carte est indisponible pour le moment. Saisissez une adresse ou des coordonnées ci-dessus.</div>';
     }
   }
-  function closeLocationModal() {
-    $('#testlocation').innerHTML = '';
-    state.locationStep = false;
-  }
+}
+function closeLocationModal() {
+  $('#testlocation').innerHTML = '';
+  state.locationStep = false;
+  state.locationMap = null;
+  state.locationMarker = null;
 }
 async function shareTestLocation() {
   const status = $('#location-status');
@@ -1308,6 +1331,12 @@ async function shareTestLocation() {
       const input = $('#test-location-manual');
       if (input) input.value = value;
       if (status) status.textContent = `Position trouvée : ${value}. Appuyez sur Envoyer la localisation.`;
+      if (state.locationMap && window.L) {
+        const latlng = [position.coords.latitude, position.coords.longitude];
+        if (!state.locationMarker) state.locationMarker = L.marker(latlng).addTo(state.locationMap);
+        else state.locationMarker.setLatLng(latlng);
+        state.locationMap.setView(latlng, Math.max(state.locationMap.getZoom(), 15));
+      }
     },
     error => {
       const reason = error.code === 1 ? 'Autorisation refusée.' : 'Position indisponible.';
@@ -1628,7 +1657,7 @@ async function confirmOrder(){
     state.clients.unshift({name:DEMO_CONTACT.name, phone:DEMO_CONTACT.phone, channel:DEMO_CONTACT.channel, orders:1, spent:total, last:'à l\u2019instant'});
   const prod=PRODUCTS.find(x=>x.ref===p.ref); if(prod) prod.qty=Math.max(0,prod.qty-bot.qty);
 
-  await botSays(`C\u2019est enregistré ✅\nVotre commande ${ref} est confirmée pour un montant de ${fcfa(total)}.\nNous vous écrivons dès qu\u2019elle est prête.`);
+  await botSays(`C\u2019est enregistré.\nVotre commande ${ref} est confirmée pour un montant de ${fcfa(total)}.\nNous vous écrivons dès qu\u2019elle est prête.`);
   bubble('sys', `Commande ${ref} créée dans le tableau de bord · ${fcfa(total)}`);
   toast(`Commande ${ref} ajoutée à « À préparer »`);
   renderSidebar();

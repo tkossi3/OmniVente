@@ -5,7 +5,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
 
 Channel = Literal["whatsapp", "instagram", "messenger", "email"]
-Status = Literal["preparer", "livraison", "retrait", "termine", "probleme"]
+Status = Literal["preparer", "livraison", "livre", "retrait", "termine", "probleme"]
 
 
 class ProductOut(BaseModel):

@@ -40,7 +40,7 @@ def catalogue_text(catalog: list[dict]) -> str:
 def greeting(name: str, shop: dict, catalog: list[dict]) -> Reply:
     first = (name or "").split(" ")[0] or "à vous"
     return Reply(
-        text=f"Bonjour {first} 👋 Bienvenue chez {shop.get('company', 'notre boutique')}.\n\n"
+        text=f"Bonjour {first}. Bienvenue chez {shop.get('company', 'notre boutique')}.\n\n"
              + catalogue_text(catalog),
         step="catalogue",
         quick=[str(p["position"]) for p in catalog[:5]],
@@ -157,7 +157,7 @@ def advance(session: dict, text: str, catalog: list[dict], shop: dict,
             return session, Reply(
                 "Merci. Envoyez maintenant votre position GPS (ou le nom de votre quartier) "
                 "pour guider le livreur.",
-                "position", ["📍 Partager ma position"])
+                "position", ["Partager ma position"])
         session["place"] = shop.get("pickup_point", "Boutique")
         session["step"] = "validation"
         return session, Reply(_summary(session, product), "validation", ["1", "2"])
@@ -181,7 +181,7 @@ def advance(session: dict, text: str, catalog: list[dict], shop: dict,
             }
             session["step"] = "fin"
             return session, Reply(
-                "C'est enregistré ✅\nVotre commande est confirmée pour un montant de "
+                "C'est enregistré.\nVotre commande est confirmée pour un montant de "
                 f"{fcfa(total)}.\nNous vous écrivons dès qu'elle est prête.",
                 "fin", ["Nouvelle commande"], order=order)
         if choice == 2:

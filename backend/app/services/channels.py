@@ -65,11 +65,12 @@ def send_email(to: str, text: str, subject: str = "Votre commande", config: dict
     return True
 
 
-def dispatch(channel: str, destination: str, text: str, config: dict | None = None) -> bool:
+def dispatch(channel: str, destination: str, text: str, config: dict | None = None,
+             subject: str = "Votre commande") -> bool:
     if channel == "whatsapp":
         return send_whatsapp(destination, text, config)
     if channel in ("messenger", "instagram"):
         return send_meta(destination, text, channel, config)
     if channel == "email":
-        return send_email(destination, text, config)
+        return send_email(destination, text, subject=subject, config=config)
     return False

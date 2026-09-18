@@ -8,7 +8,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database import Base
 
 CHANNELS = ("whatsapp", "instagram", "messenger", "email")
-ORDER_STATUSES = ("preparer", "livraison", "retrait", "termine", "probleme")
+ORDER_STATUSES = ("preparer", "livraison", "livre", "retrait", "termine", "probleme")
 
 
 class Tenant(Base):
