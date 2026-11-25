@@ -459,6 +459,10 @@ let apiError = null;           // dernier message d'erreur réseau, pour le band
 let health = null;             // dernière réponse de GET /health (statut Groq, sondeur e-mail…)
 
 async function api(path, opts = {}) {
+  const method = (opts.method || 'GET').toUpperCase();
+  if (method !== 'GET' && !requireAuthentication()) {
+    throw new Error('Connectez-vous pour effectuer cette opération.');
+  }
   const res = await fetch(API_BASE + path, {
     ...opts,
     headers: { 'Content-Type': 'application/json', 'X-Tenant': TENANT_SLUG, ...(opts.headers || {}) },
@@ -507,6 +511,12 @@ async function api(path, opts = {}) {
     if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
   }
 
+  function requireAuthentication(message = 'Connectez-vous pour effectuer cette opération.') {
+    if (authSession) return true;
+    renderAuth('login', message);
+    return false;
+  }
+
   function renderAuth(mode = 'login', message = '') {
     const root = $('#auth-root');
     if (!root) return;
@@ -521,14 +531,15 @@ async function api(path, opts = {}) {
       </div>
       <form class="auth-form" id="auth-form">
         <h2 id="auth-title">${register ? 'Créer votre compte' : 'Bon retour'}</h2>
-        <p>${register ? 'Configurez votre espace marchand en quelques secondes.' : 'Connectez-vous pour accéder à votre tableau de bord.'}</p>
+        <p>${register ? 'Configurez votre espace marchand en quelques secondes.' : 'La consultation est libre. Connectez-vous pour gérer votre espace.'}</p>
         <div class="auth-fields">
           ${register ? '<label>Nom de l’entreprise<input name="company" required maxlength="160" autocomplete="organization"></label><label>Nom du responsable<input name="manager" required maxlength="120" autocomplete="name"></label>' : ''}
           <label>Adresse e-mail<input name="email" type="email" required autocomplete="email"></label>
           <label>Mot de passe<input name="password" type="password" required minlength="8" autocomplete="${register ? 'new-password' : 'current-password'}"></label>
         </div>
         <div class="auth-error" role="alert">${esc(message)}</div>
-        <div class="auth-actions"><button class="btn primary" type="submit">${register ? 'Créer le compte' : 'Se connecter'}</button></div>
+        <div class="auth-actions"><button class="btn primary" type="submit">${register ? 'Créer le compte' : 'Se connecter'}</button>
+          <button class="btn ghost" type="button" data-auth-dismiss>Retour à la consultation</button></div>
         <div class="auth-switch">${register ? 'Vous avez déjà un compte ?' : 'Vous n’avez pas encore de compte ?'} <button type="button" data-auth-mode="${register ? 'login' : 'register'}">${register ? 'Se connecter' : 'Créer un compte'}</button></div>
       </form>
     </section>`;
@@ -557,7 +568,17 @@ async function api(path, opts = {}) {
     clearAuthSession();
     state.view = 'dashboard';
     state.conv = 'live';
-    renderAuth('login', 'Vous êtes déconnecté.');
+    loadDemoData();
+    state.liveConversations = [];
+    state.testConversations = [];
+    state.notifications = [];
+    state.notificationsOpen = false;
+    state.integrations = {};
+    state.testSession = null;
+    state.testName = '';
+    state.log = [];
+    apiError = 'Connectez-vous pour consulter les données de votre espace.';
+    render();
   }
 async function checkApi() {
   if (!API_BASE || API_BASE.includes('VOTRE-BACKEND') || API_BASE.includes('TON-BACKEND')) {
@@ -775,6 +796,7 @@ function mapOrder(o) {
 }
 
 async function updateOrderStatus(reference, status) {
+  if (!requireAuthentication()) { render(); return; }
   if (!LIVE) return;
   try {
     await api(`/orders/${encodeURIComponent(reference)}`, {
@@ -796,6 +818,7 @@ function productFormValues() {
     price: Number(value('price')), quantity: Number(value('quantity')), category: value('category') };
 }
 async function saveProduct() {
+  if (!requireAuthentication()) return;
   if (!LIVE) return toast('Le catalogue est modifiable après connexion à l’API.');
   const payload = productFormValues();
   const original = $('#product_original_ref')?.value;
@@ -807,6 +830,7 @@ async function saveProduct() {
   } catch (e) { toast('Impossible d’enregistrer ce produit'); }
 }
 async function adjustStock(ref, delta) {
+  if (!requireAuthentication()) return;
   const product = PRODUCTS.find(p => p.ref === ref);
   if (!LIVE || !product) return;
   try { await api(`/products/${encodeURIComponent(ref)}/stock`, { method:'PATCH', body:JSON.stringify({quantity:Math.max(0, product.qty + delta)}) });
@@ -814,11 +838,13 @@ async function adjustStock(ref, delta) {
   } catch (e) { toast('Impossible de modifier le stock'); }
 }
 async function deleteProduct(ref) {
+  if (!requireAuthentication()) return;
   if (!LIVE || !confirm(`Supprimer ${ref} ?`)) return;
   try { await api(`/products/${encodeURIComponent(ref)}`, {method:'DELETE'}); await refreshLiveQuiet(); render(); toast('Produit supprimé'); }
   catch (e) { toast('Ce produit est peut-être déjà utilisé dans une commande'); }
 }
 async function deleteClient(id, name) {
+  if (!requireAuthentication()) return;
   if (!LIVE) return toast('La suppression nécessite le backend connecté.');
   if (!confirm(`Supprimer ${name} et son historique ?`)) return;
   try {
@@ -832,6 +858,7 @@ async function deleteClient(id, name) {
   } catch (e) { toast('Impossible de supprimer ce client'); }
 }
 async function saveChannels() {
+  if (!requireAuthentication()) return;
   if (!LIVE) return toast('Connectez le backend pour enregistrer les canaux.');
   const value = id => document.querySelector(`#f_channel_${id}`)?.value?.trim() || '';
   try {
@@ -949,7 +976,7 @@ const NAV = [
 
 function renderSidebar(){
   const groups = [...new Set(NAV.map(n=>n.group))];
-  const p = state.profile;
+  const account = authSession?.profile;
   $('#sidebar').innerHTML = `
     <div class="brand">${LOGO}<div><b>OmniVente</b><small>Commerce conversationnel</small></div></div>
     ${groups.map(g=>`<div class="navgroup">${g}</div>` + NAV.filter(n=>n.group===g).map(n=>`
@@ -957,13 +984,17 @@ function renderSidebar(){
         ${svg(n.icon)}<span>${n.label}</span>${n.count?`<span class="count num">${n.count()}</span>`:''}
       </button>`).join('')).join('')}
     <button class="userbtn" id="userbtn" aria-expanded="false" aria-haspopup="menu">
-      <span class="av">${initials(p.company)}</span>
-      <span class="who"><b>${esc(p.company)}</b><span>${esc(p.manager)} · Administratrice</span></span>
+      <span class="av">${initials(account?.company || 'Visiteur')}</span>
+      <span class="who"><b>${esc(account?.company || 'Visiteur')}</b><span>${account ? `${esc(account.manager)} · Administratrice` : 'Se connecter pour opérer'}</span></span>
       <span class="caret">${svg(ICON.caret,2)}</span>
     </button>`;
 }
 
 function togglePopover(){
+  if (!authSession) {
+    requireAuthentication('Connectez-vous pour accéder à votre espace marchand.');
+    return;
+  }
   const existing = $('#popover');
   const btn = $('#userbtn');
   if(existing){ existing.remove(); btn.setAttribute('aria-expanded','false'); return; }
@@ -1003,7 +1034,7 @@ function renderTopbar(){
     <button class="iconbtn burger" data-act="menu" aria-label="Ouvrir le menu">${svg('M4 7h16M4 12h16M4 17h16',2)}</button>
     <div class="crumb"><b>${esc(t)}</b>${esc(s)}</div>
     <span class="livebadge ${LIVE?'on':'off'}" title="${LIVE?'Données en direct depuis '+API_BASE:esc(apiError||'')}">
-      <span class="d"></span>${LIVE?'Connecté à l\u2019API':'Mode démonstration'}</span>
+      <span class="d"></span>${LIVE?'Connecté à l\u2019API':(authSession?'Mode démonstration':'Mode aperçu')}</span>
     <label class="search">${svg(ICON.search)}<input type="search" placeholder="Rechercher une commande, un client…" aria-label="Rechercher"></label>
     <button class="iconbtn" data-act="theme" aria-label="Changer de thème">${svg(dark?ICON.sun:ICON.moon)}</button>
     <button class="iconbtn" data-act="notif" aria-label="Notifications">${svg(ICON.bell)}<span class="dot"></span></button>
@@ -1864,6 +1895,13 @@ function toggleTheme(){
 
 /* ------------------------------ Événements ------------------------------ */
 document.addEventListener('click', async (e)=>{
+  const authDismiss = e.target.closest('[data-auth-dismiss]');
+  if(authDismiss){
+    $('#auth-root').hidden = true;
+    document.querySelector('.app').hidden = false;
+    render();
+    return;
+  }
   const authMode = e.target.closest('[data-auth-mode]');
   if(authMode){ renderAuth(authMode.dataset.authMode); return; }
   const go_ = e.target.closest('[data-go]'); if(go_){ go(go_.dataset.go); return; }
@@ -1956,6 +1994,7 @@ document.addEventListener('click', async (e)=>{
       document.body.appendChild(sc); break;
     }
     case 'saveprofile': {
+      if(!requireAuthentication()) break;
       const payload={};
       document.querySelectorAll('[data-p]').forEach(i=>{ payload[i.dataset.p]=i.value; state.profile[i.dataset.p]=i.value; });
       if(LIVE){
@@ -2020,7 +2059,9 @@ async function startDashboard(){
 async function boot(){
   readAuthSession();
   if (!authSession) {
-    renderAuth('login');
+    loadDemoData();
+    apiError = 'Connectez-vous pour consulter les données de votre espace.';
+    render();
     return;
   }
   await startDashboard();

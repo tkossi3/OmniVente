@@ -153,7 +153,12 @@ depuis n'importe quel dossier est :
 ### 2.6 Interface
 
 Ouvrez `frontend/index.html` dans un navigateur : elle fonctionne immédiatement,
-sans serveur, en mode démonstration (bandeau ambre en haut de l'écran).
+sans serveur, en mode aperçu avec des données de démonstration.
+
+L'interface s'ouvre d'abord en **mode aperçu**, sans connexion et avec des données
+de démonstration. La connexion est proposée lorsqu'on veut gérer l'espace ou
+effectuer une modification. Après connexion, les données réelles du compte sont
+chargées depuis l'API ; se déconnecter ramène au mode aperçu.
 
 Pour la brancher sur l'API locale que vous venez de lancer, vérifiez
 `frontend/config.js` :
@@ -163,7 +168,8 @@ window.OMNIVENTE_API_BASE = "http://localhost:8000/api";
 window.OMNIVENTE_TENANT = "kino-steak";
 ```
 
-Rechargez la page : le bandeau passe au vert **Connecté à l'API**.
+Connectez-vous depuis le bouton « Visiteur » en bas de la barre latérale : le
+bandeau passe au vert **Connecté à l'API**.
 
 Dans l'onglet **Commandes**, le sélecteur de chaque commande permet de la déplacer
 entre « À préparer », « En cours de livraison », « Retrait en boutique », « Terminé »
